@@ -1,0 +1,74 @@
+<div class="announcement-bar-V2">
+  <div class="announcement-content">
+    <p class="announcement-message">{{ section.settings.message }}</p>
+    <div class="social-icons">
+      {% if section.settings.show_twitter %}
+        <a href="{{ section.settings.twitter_url }}" target="_blank" rel="noopener noreferrer">
+          {% render 'icon-twitter' %}
+        </a>
+      {% endif %}
+      {% if section.settings.show_instagram %}
+        <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener noreferrer">
+          {% render 'icon-insta' %}
+        </a>
+      {% endif %}
+      {% if section.settings.show_facebook %}
+        <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener noreferrer">
+          {% render 'icon-facebook' %}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar V2",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Message",
+      "default": "You're $99.99 USD away from free shipping!"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_twitter",
+      "label": "Show Twitter Icon",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "Twitter URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_instagram",
+      "label": "Show Instagram Icon",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_facebook",
+      "label": "Show Facebook  Icon",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar V2"
+    }
+  ]
+}
+{% endschema %}

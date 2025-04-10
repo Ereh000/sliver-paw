@@ -1,0 +1,126 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+ {
+  "sections": {
+    "image_banner_v2_AakwJd": {
+      "type": "image-banner-v2",
+      "settings": {
+        "video_url": "https://cdn.shopify.com/videos/c/o/v/7fc504a8d4b74bf3b4981d93aa344d40.mp4",
+        "image": "shopify://shop_images/0929ea7e6b885de4b01fb1529552ff89.png",
+        "image_position": "center center",
+        "desktop_height": 630,
+        "mobile_height": 400,
+        "heading": "PREMIUM BULLY STICKS <br> SAFE, HEALTHY & DELICIOUS",
+        "heading_size": 40,
+        "heading_color": "#ffffff",
+        "heading_text_shadow": true,
+        "subheading": "",
+        "subheading_size": 24,
+        "subheading_color": "#ffffff",
+        "subheading_text_shadow": true,
+        "button_label": "SHOP NOW",
+        "button_link": "",
+        "button_background": "#c73232",
+        "button_background_hover": "#a52828",
+        "button_text_color": "#ffffff",
+        "desktop_content_position": "bottom-left",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "text_box_color": "#000000",
+        "text_box_opacity": 0.7
+      }
+    },
+    "featured_product_v2_mTihWm": {
+      "type": "featured-product-v2",
+      "settings": {
+        "product": "bonez-bully-sticks",
+        "custom_title": "",
+        "product_description": "<p>Premium 5-8 inch bully sticks in a 12-pack — long-lasting, healthy chews your dog will love. Limited-time offer!</p>",
+        "show_accent_element": true,
+        "default_purchase_option": "subscribe",
+        "subscription_selling_plan_id": "",
+        "quantity_options": "3,6,9,12"
+      }
+    },
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Browse our latest products",
+            "heading_size": "h0"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop all",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "button"
+      ],
+      "settings": {
+        "image_overlay_opacity": 40,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-3",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "all",
+        "products_to_show": 8,
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "image_banner_v2_AakwJd",
+    "featured_product_v2_mTihWm",
+    "image_banner",
+    "featured_collection"
+  ]
+}

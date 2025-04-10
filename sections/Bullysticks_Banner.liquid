@@ -1,0 +1,171 @@
+{% schema %}
+{
+  "name": "Bullysticks Banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image"
+    },
+    {
+      "type": "textarea",
+      "id": "text_1",
+      "label": "First line of text",
+      "default": "100% Natural & Hormone-Free"
+    },
+    {
+      "type": "textarea",
+      "id": "text_2",
+      "label": "Second line of text",
+      "default": "Cleans Teeth & Promotes Oral Health"
+    },
+    {
+      "type": "textarea",
+      "id": "text_3",
+      "label": "Third line of text",
+      "default": "Fully Digestible – No Rawhide, No Fillers"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Banner Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bullysticks Banner"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .bully-banner * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .bully-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+        padding-bottom: 0;
+    text-align: center;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff;
+    color: #db3225;
+  }
+
+  .bully-banner .bully-content {
+    max-width: 600px;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .bully-banner .bully-content img.logo {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+  }
+
+  .bully-banner .bully-content p {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    color: #db3225;
+    font-weight: 500;
+  }
+
+  .bully-banner .bully-button {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    background-color: #db3225;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .bully-banner .bully-button:hover {
+    background-color: #b52b1f;
+  }
+
+  .bully-banner .bully-image {
+    position: static;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .bully-banner .bully-image img {
+    max-width: 600px;
+    /* width: 100%; */
+    height: auto;
+  }
+
+  .bully-banner .bully-label {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: #db3225;
+    color: white;
+    padding: 1rem;
+    border-bottom-left-radius: 40px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .bully-banner {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+      padding: 5rem 3rem;
+    }
+
+    .bully-banner .bully-content {
+      max-width: 50%;
+    }
+
+    .bully-banner .bully-image {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      max-width: 45%;
+      padding: 0 3rem 1rem 0;
+    }
+  }
+</style>
+
+<div class="bully-banner">
+  <div class="bully-label">
+    1<br />INGREDIENT<br />ONLY
+  </div>
+  <div class="bully-content">
+    {% if section.settings.logo_image != blank %}
+      <img class="logo" src="{{ section.settings.logo_image | image_url }}" alt="Bonez Bullysticks Logo" />
+    {% endif %}
+    {% if section.settings.text_1 != blank %}<p>{{ section.settings.text_1 }}</p>{% endif %}
+    {% if section.settings.text_2 != blank %}<p>{{ section.settings.text_2 }}</p>{% endif %}
+    {% if section.settings.text_3 != blank %}<p>{{ section.settings.text_3 }}</p>{% endif %}
+    <a href="#" class="bully-button">BUNDLE &amp; SAVE</a>
+  </div>
+  <div class="bully-image">
+    {% if section.settings.main_image != blank %}
+      <img src="{{ section.settings.main_image | image_url }}" alt="Dog with Bullystick" />
+    {% endif %}
+  </div>
+</div>

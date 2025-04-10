@@ -1,0 +1,187 @@
+{% schema %}
+{
+  "name": "Bullysticks Banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image"
+    },
+    {
+      "type": "textarea",
+      "id": "text_1",
+      "label": "First line of text",
+      "default": "100% Natural & Hormone-Free"
+    },
+    {
+      "type": "textarea",
+      "id": "text_2",
+      "label": "Second line of text",
+      "default": "Cleans Teeth & Promotes Oral Health"
+    },
+    {
+      "type": "textarea",
+      "id": "text_3",
+      "label": "Third line of text",
+      "default": "Fully Digestible – No Rawhide, No Fillers"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Banner Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bullysticks Info Section"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .bully-info-section {
+    background: linear-gradient(135deg, #fff7f4 0%, #fefefe 100%);
+    padding: 4rem 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bully-info-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .bully-info-heading {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #111;
+    letter-spacing: -0.5px;
+  }
+
+  .bully-info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: #fff;
+    border-radius: 30px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    text-align:center;
+  }
+
+  .bully-info-left img {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  }
+
+  .bully-info-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    font-size: 0.95rem;
+    color: #444;
+  }
+
+  .bully-info-feature strong {
+    display: block;
+    color: #db3225;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+  }
+
+  .bully-bg-circle {
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: #ffe6e2;
+    border-radius: 50%;
+    z-index: 0;
+    filter: blur(70px);
+    opacity: 0.3;
+  }
+
+  .bully-bg-circle.right {
+    top: auto;
+    bottom: -80px;
+    left: auto;
+    right: -80px;
+  }
+
+  @media (min-width: 768px) {
+    .bully-info-section {
+      padding: 5rem 2rem;
+    }
+
+    .bully-info-heading {
+      font-size: 2.5rem;
+    }
+
+    .bully-info-content {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      padding: 3rem 2rem;
+    }
+
+    .bully-info-right {
+      font-size: 1rem;
+    }
+
+    .bully-info-feature strong {
+      font-size: 1.15rem;
+    }
+  }
+</style>
+
+<section class="bully-info-section">
+  <div class="bully-bg-circle"></div>
+  <div class="bully-bg-circle right"></div>
+
+  <div class="bully-info-wrapper">
+    <h2 class="bully-info-heading">WHY CHOOSE BONEZ BULLY STICKS?</h2>
+    <div class="bully-info-content">
+      <div class="bully-info-left">
+        <img src="https://cdn.shopify.com/s/files/1/2222/5817/files/Artboard_1.png?v=1743018135" alt="Bonez Bullysticks Product Image">
+      </div>
+      <div class="bully-info-right">
+        <div class="bully-info-feature">
+          <strong>100% Natural & Single-Ingredient</strong>
+          Made from real beef, free from additives & preservatives.
+        </div>
+        <div class="bully-info-feature">
+          <strong>Cleans Teeth Naturally</strong>
+          Reduces plaque & tartar for a fresher breath.
+        </div>
+        <div class="bully-info-feature">
+          <strong>Fully Digestible & Safe</strong>
+          Unlike rawhide, our bully sticks break down naturally in your dog’s stomach.
+        </div>
+        <div class="bully-info-feature">
+          <strong>Sourced & Made in the USA</strong>
+          Complies with USDA, FDA, CHIA, and SQF safety standards.
+        </div>
+        <div class="bully-info-feature">
+          <strong>Slow-Roasted for Maximum Flavor</strong>
+          Packed with irresistible taste your dog will love.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

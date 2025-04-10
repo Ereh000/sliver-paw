@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --red: #c73232;
+}
+
+.page-width{
+  max-width: 100%;
+  padding-left: 7%;
+  padding-right: 7%;
+  margin: 0 !important;
+}
+
+/* Announcement Bar Section Styles */
+.announcement-bar-V2 {
+  background-color: #f8eaea; /* Light pink background */
+  border-top: 1px solid #ddd; /* Thin top border */
+  border-bottom: 1px solid #ddd; /* Thin bottom border */
+  padding: 10px 7%; /* Padding for content */
+  display: flex;
+  justify-content: space-between; /* Aligns message and icons */
+  align-items: center; /* Vertically centers content */
+  font-size: 16px; /* Default font size */
+}
+
+.announcement-bar-V2 .announcement-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  position: relative;
+}
+
+.announcement-bar-V2 .announcement-message {
+  margin: 0; /* Remove default margin */
+  color: #333; /* Dark gray text color */
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.announcement-bar-V2 .social-icons {
+  display: flex;
+  gap: 15px; /* Space between icons */
+  margin-bottom: -6px;
+  position: absolute;
+  right: 0;
+}
+
+.announcement-bar-V2 .social-icons a {
+  color: #333; /* Dark gray icon color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.announcement-bar-V2 .social-icons a:hover {
+  color: #007bff; /* Blue hover color */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .announcement-bar-V2 {
+    flex-direction: column; /* Stacks content vertically on smaller screens */
+    align-items: flex-start; /* Aligns content to the left */
+  }
+
+  .announcement-bar-V2 .social-icons {
+    margin-top: 10px; /* Adds spacing on smaller screens */
+  }
+}
+/* Announcement Bar Section Styles Ends */
+

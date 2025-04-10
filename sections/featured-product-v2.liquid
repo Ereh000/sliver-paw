@@ -1,0 +1,567 @@
+{{ 'featured-prduct-v2.css' | asset_url | stylesheet_tag }}
+
+<div class="featured-product" data-section-id="{{ section.id }}" data-section-type="featured-product">
+  <div class="page-width">
+    <div class="featured-product__container">
+      <div class="featured-product__media">
+        <div class="featured-product__image-wrapper">
+          {% if section.settings.product.featured_media %}
+            <img
+              src="{{ section.settings.product.featured_media | img_url: 'master' }}"
+              alt="{{ section.settings.product.featured_media.alt | escape }}"
+              class="featured-product__image"
+              loading="lazy"
+              height=""
+              width=""
+            >
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+
+          {% if section.settings.show_accent_element %}
+            <div class="featured-product__accent-element"></div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="featured-product__details">
+        <h2 class="featured-product__title">
+          {% if section.settings.custom_title != blank %}
+            {{ section.settings.custom_title }}
+          {% else %}
+            {{ section.settings.product.title }}
+          {% endif %}
+        </h2>
+
+        <div class="featured-product__variant-picker" data-product-id="{{ section.settings.product.id }}">
+          <form
+            method="post"
+            action="/cart/add"
+            id="product-form-{{ section.id }}"
+            accept-charset="UTF-8"
+            class="featured-product__form"
+            enctype="multipart/form-data"
+          >
+            <input type="hidden" name="form_type" value="product">
+            <input type="hidden" name="utf8" value="✓">
+            <input
+              type="hidden"
+              name="id"
+              value="{{ section.settings.product.selected_or_first_available_variant.id }}"
+              id="variant-id-{{ section.id }}"
+            >
+            <input
+              type="hidden"
+              name="quantity"
+              value="1"
+              id="quantity-input-{{ section.id }}"
+            >
+
+            {% if section.settings.product.has_only_default_variant == false %}
+              <div class="featured-product__options">
+                {% for option in section.settings.product.options_with_values %}
+                  <div class="featured-product__option-selector" data-option-index="{{ forloop.index0 }}">
+                    <h3 class="featured-product__option-title">{{ option.name }}</h3>
+                    <div class="featured-product__option-values">
+                      {% for value in option.values %}
+                        <label class="featured-product__option-value {% if forloop.first %}selected{% endif %}">
+                          <input
+                            type="radio"
+                            name="option{{ forloop.parentloop.index }}"
+                            value="{{ value }}"
+                            {% if forloop.first %}
+                              checked
+                            {% endif %}
+                            data-index="option{{ forloop.parentloop.index }}"
+                            class="featured-product__option-input"
+                          >
+                          {% comment %} <span class="featured-product__option-indicator"></span> {% endcomment %}
+                          <span class="featured-product__option-label">{{ value }}</span>
+                        </label>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <!-- Remove the quantity selector section as we'll use pricing tiers for quantity -->
+
+            <div class="featured-product__description">
+              {{ section.settings.product_description }}
+            </div>
+
+            <div class="featured-product__pricing-tiers">
+              <div class="featured-product__pricing-tier" data-quantity="1">
+                <div class="featured-product__pricing-tier-header">
+                  <h3>BUY 1</h3>
+                  <p>Standard price</p>
+                </div>
+                <div class="featured-product__pricing-tier-price">
+                  <span class="money">{{ section.settings.product.price | money }}</span>
+                </div>
+              </div>
+
+              <div class="featured-product__pricing-tier" data-quantity="2">
+                <div class="featured-product__pricing-tier-header">
+                  <h3>BUY 2</h3>
+                  <p>Get 10% off</p>
+                </div>
+                <div class="featured-product__pricing-tier-price">
+                  <span class="money">{{ section.settings.product.price | money }}</span>
+                </div>
+              </div>
+
+              <div class="featured-product__pricing-tier" data-quantity="3">
+                <div class="featured-product__pricing-tier-header">
+                  <h3>BUY 3+</h3>
+                  <p>Get 15% off</p>
+                </div>
+                <div class="featured-product__pricing-tier-price">
+                  <span class="money">{{ section.settings.product.price | money }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="featured-product__purchase-options">
+              <label class="featured-product__purchase-option {% if section.settings.default_purchase_option == 'subscribe' %}selected{% endif %}">
+                <input
+                  type="radio"
+                  name="purchase_option"
+                  value="subscribe"
+                  {% if section.settings.default_purchase_option == 'subscribe' %}
+                    checked
+                  {% endif %}
+                  class="featured-product__purchase-input"
+                >
+                <span class="featured-product__purchase-indicator"></span>
+                <div class="featured-product__purchase-details">
+                  <span class="featured-product__purchase-label">SUBSCRIBE & SAVE 10%</span>
+                  <div class="featured-product__purchase-price">
+                    <s>{{ section.settings.product.price | money }}</s>
+                    <span class="money">{{ section.settings.product.price | times: 0.9 | money }}</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="featured-product__purchase-option {% if section.settings.default_purchase_option == 'onetime' %}selected{% endif %}">
+                <input
+                  type="radio"
+                  name="purchase_option"
+                  value="onetime"
+                  {% if section.settings.default_purchase_option == 'onetime' %}
+                    checked
+                  {% endif %}
+                  class="featured-product__purchase-input"
+                >
+                <span class="featured-product__purchase-indicator"></span>
+                <div class="featured-product__purchase-details">
+                  <span class="featured-product__purchase-label">TRY-ONCE</span>
+                  <div class="featured-product__purchase-price">
+                    <span class="money">{{ section.settings.product.price | money }}</span>
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <div class="featured-product__submit">
+              <button
+                type="submit"
+                name="add"
+                class="featured-product__add-to-cart-button"
+                {% unless section.settings.product.available %}
+                  disabled
+                {% endunless %}
+              >
+                <span class="featured-product__add-to-cart-icon">{% render 'icon-cart' %}</span>
+                <span class="featured-product__add-to-cart-text">
+                  {% if section.settings.product.available %}
+                    {{ 'products.product.add_to_cart' | t }}
+                  {% else %}
+                    {{ 'products.product.sold_out' | t }}
+                  {% endif %}
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    // Product variants data
+    const productVariants = {{ section.settings.product.variants | json }};
+    const variantOptions = {{ section.settings.product.options_with_values | json }};
+    
+    // Option selection
+    const optionValues = section.querySelectorAll('.featured-product__option-value');
+    optionValues.forEach((option) => {
+      option.addEventListener('click', function () {
+        const optionIndex = this.querySelector('input').getAttribute('data-index');
+        const optionSelector = this.closest('.featured-product__option-selector');
+        
+        // Update selected state
+        optionSelector.querySelectorAll('.featured-product__option-value').forEach((opt) => {
+          opt.classList.remove('selected');
+        });
+        this.classList.add('selected');
+        this.querySelector('input').checked = true;
+        
+        updateVariantId();
+      });
+    });
+
+    // Pricing tier selection (quantity)
+    const pricingTiers = section.querySelectorAll('.featured-product__pricing-tier');
+    pricingTiers.forEach((tier) => {
+      tier.addEventListener('click', function () {
+        pricingTiers.forEach((t) => t.classList.remove('selected'));
+        this.classList.add('selected');
+        
+        // Update quantity
+        const quantity = this.getAttribute('data-quantity');
+        document.getElementById('quantity-input-{{ section.id }}').value = quantity;
+        
+        // Update pricing display based on quantity
+        updatePricingForQuantity(quantity);
+      });
+    });
+    
+    // Set the first pricing tier as selected by default
+    if (pricingTiers.length > 0) {
+      pricingTiers[0].classList.add('selected');
+    }
+    
+    function updatePricingForQuantity(quantity) {
+      // This function can be used to update any pricing information
+      // based on the selected quantity if needed
+      
+      // For example, you might want to update the subscription price
+      // based on the selected quantity
+      const variantPrice = parseFloat(document.getElementById('variant-id-{{ section.id }}').getAttribute('data-price') || {{ section.settings.product.price }});
+      
+      // Update subscription price with quantity and discount
+      const subscriptionPrice = section.querySelector('.featured-product__purchase-option:first-child .featured-product__purchase-price');
+      if (subscriptionPrice) {
+        const originalPriceElement = subscriptionPrice.querySelector('s');
+        const discountedPriceElement = subscriptionPrice.querySelector('.money');
+        
+        let totalPrice = variantPrice * quantity;
+        
+        // Apply quantity discount
+        if (quantity >= 3) {
+          totalPrice = totalPrice * 0.85; // 15% off for 3+
+        } else if (quantity >= 2) {
+          totalPrice = totalPrice * 0.9; // 10% off for 2
+        }
+        
+        // Apply subscription discount (additional 10%)
+        const subscriptionDiscount = totalPrice * 0.9;
+        
+        if (originalPriceElement) {
+          originalPriceElement.textContent = formatMoney(totalPrice);
+        }
+        
+        if (discountedPriceElement) {
+          discountedPriceElement.textContent = formatMoney(subscriptionDiscount);
+        }
+      }
+      
+      // Update one-time price with quantity and discount
+      const onetimePrice = section.querySelector('.featured-product__purchase-option:last-child .money');
+      if (onetimePrice) {
+        let totalPrice = variantPrice * quantity;
+        
+        // Apply quantity discount
+        if (quantity >= 3) {
+          totalPrice = totalPrice * 0.85; // 15% off for 3+
+        } else if (quantity >= 2) {
+          totalPrice = totalPrice * 0.9; // 10% off for 2
+        }
+        
+        onetimePrice.textContent = formatMoney(totalPrice);
+      }
+    }
+    
+    // Purchase option selection
+    const purchaseOptions = section.querySelectorAll('.featured-product__purchase-option');
+    purchaseOptions.forEach((option) => {
+      option.addEventListener('click', function () {
+        purchaseOptions.forEach((opt) => opt.classList.remove('selected'));
+        this.classList.add('selected');
+        this.querySelector('input').checked = true;
+      });
+    });
+
+    // AJAX add to cart
+    const form = section.querySelector('#product-form-{{ section.id }}');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      
+      const purchaseType = section.querySelector('.featured-product__purchase-option.selected input').value;
+      if (purchaseType === 'subscribe') {
+        formData.append('selling_plan', '{{ section.settings.subscription_selling_plan_id }}');
+      }
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Update cart count and show success message
+          updateCartCount();
+          showAddToCartMessage('Product added to cart!');
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          showAddToCartMessage('Error adding product to cart', true);
+        });
+    });
+
+    function updateVariantId() {
+      // Get selected options
+      const selectedOptions = [];
+      variantOptions.forEach((option, index) => {
+        const selectedOption = section.querySelector(`input[name="option${index + 1}"]:checked`);
+        if (selectedOption) {
+          selectedOptions.push(selectedOption.value);
+        }
+      });
+      
+      // Find matching variant
+      const matchingVariant = productVariants.find(variant => {
+        return variant.options.every((option, index) => {
+          return option === selectedOptions[index];
+        });
+      });
+      
+      if (matchingVariant) {
+        // Update variant ID
+        document.getElementById('variant-id-{{ section.id }}').value = matchingVariant.id;
+        
+        // Update price display if needed
+        updatePriceDisplay(matchingVariant.price);
+      }
+    }
+    
+    function updatePriceDisplay(variantPrice) {
+      // Format price to money format
+      const formattedPrice = formatMoney(variantPrice);
+      
+      // Update pricing tiers
+      pricingTiers.forEach((tier, index) => {
+        const priceElement = tier.querySelector('.money');
+        let price = variantPrice;
+        
+        // Apply discounts for tiers
+        if (index === 1) { // Buy 2 (10% off)
+          price = price * 0.9;
+        } else if (index === 2) { // Buy 3+ (15% off)
+          price = price * 0.85;
+        }
+        
+        priceElement.textContent = formatMoney(price);
+      });
+      
+      // Update subscription price
+      const subscriptionPrice = section.querySelector('.featured-product__purchase-option:first-child .featured-product__purchase-price');
+      if (subscriptionPrice) {
+        const originalPriceElement = subscriptionPrice.querySelector('s');
+        const discountedPriceElement = subscriptionPrice.querySelector('.money');
+        
+        if (originalPriceElement) {
+          originalPriceElement.textContent = formatMoney(variantPrice);
+        }
+        
+        if (discountedPriceElement) {
+          discountedPriceElement.textContent = formatMoney(variantPrice * 0.9);
+        }
+      }
+      
+      // Update one-time price
+      const onetimePrice = section.querySelector('.featured-product__purchase-option:last-child .money');
+      if (onetimePrice) {
+        onetimePrice.textContent = formatMoney(variantPrice);
+      }
+    }
+    
+    function formatMoney(cents) {
+      const format = '{{ shop.money_format | json }}';
+      if (typeof cents === 'string') {
+        cents = cents.replace('.', '');
+      }
+      
+      let value = '';
+      const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+      const formatString = format || '₹{{amount}}';
+      
+      function formatWithDelimiters(number, precision, thousands, decimal) {
+        thousands = thousands || ',';
+        decimal = decimal || '.';
+        
+        if (isNaN(number) || number === null) {
+          return 0;
+        }
+        
+        number = (number / 100.0).toFixed(precision);
+        
+        const parts = number.split('.');
+        const dollarsAmount = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands);
+        const centsAmount = parts[1] ? (decimal + parts[1]) : '';
+        
+        return dollarsAmount + centsAmount;
+      }
+      
+      switch(formatString.match(placeholderRegex)[1]) {
+        case 'amount':
+          value = formatWithDelimiters(cents, 2);
+          break;
+        case 'amount_no_decimals':
+          value = formatWithDelimiters(cents, 0);
+          break;
+        case 'amount_with_comma_separator':
+          value = formatWithDelimiters(cents, 2, '.', ',');
+          break;
+        case 'amount_no_decimals_with_comma_separator':
+          value = formatWithDelimiters(cents, 0, '.', ',');
+          break;
+        case 'amount_with_space_separator':
+          value = formatWithDelimiters(cents, 2, ' ', '.');
+          break;
+      }
+      
+      return formatString.replace(placeholderRegex, value);
+    }
+
+    function updateCartCount() {
+      fetch('/cart.js')
+        .then((response) => response.json())
+        .then((cart) => {
+          const cartCountElements = document.querySelectorAll('.cart-count');
+          cartCountElements.forEach((element) => {
+            element.textContent = cart.item_count;
+            element.classList.toggle('hidden', cart.item_count === 0);
+          });
+        });
+    }
+
+    function showAddToCartMessage(message, isError = false) {
+      // Create or update a message element
+      let messageElement = section.querySelector('.cart-message');
+      if (!messageElement) {
+        messageElement = document.createElement('div');
+        messageElement.className = 'cart-message';
+        form.insertAdjacentElement('afterend', messageElement);
+      }
+
+      messageElement.textContent = message;
+      messageElement.classList.toggle('error', isError);
+      messageElement.classList.add('visible');
+
+      setTimeout(() => {
+        messageElement.classList.remove('visible');
+      }, 3000);
+    }
+    
+    // Initialize variant selection
+    updateVariantId();
+    
+    // Add cart message styles
+    const style = document.createElement('style');
+    style.textContent = `
+      .cart-message {
+        padding: 12px 20px;
+        margin-top: 15px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        text-align: center;
+      }
+      
+      .cart-message.visible {
+        opacity: 1;
+      }
+      
+      .cart-message.error {
+        background-color: #F44336;
+      }
+    `;
+    document.head.appendChild(style);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Featured Product v2",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "custom_title",
+      "label": "Custom title",
+      "info": "Leave blank to use product title"
+    },
+    {
+      "type": "richtext",
+      "id": "product_description",
+      "label": "Product description",
+      "default": "<p>Premium 5-8 inch bully sticks in a 12-pack — long-lasting, healthy chews your dog will love. Limited-time offer!</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_accent_element",
+      "label": "Show accent element",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "default_purchase_option",
+      "label": "Default purchase option",
+      "options": [
+        {
+          "value": "subscribe",
+          "label": "Subscribe & Save"
+        },
+        {
+          "value": "onetime",
+          "label": "Try Once"
+        }
+      ],
+      "default": "subscribe"
+    },
+    {
+      "type": "text",
+      "id": "subscription_selling_plan_id",
+      "label": "Subscription selling plan ID",
+      "info": "Enter the selling plan ID for subscription purchases"
+    },
+    {
+      "type": "text",
+      "id": "quantity_options",
+      "label": "Quantity options (comma-separated)",
+      "default": "3,6,9,12",
+      "info": "Enter quantity options separated by commas"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Product v2"
+    }
+  ]
+}
+{% endschema %}

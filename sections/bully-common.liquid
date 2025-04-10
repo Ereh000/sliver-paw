@@ -1,0 +1,1484 @@
+{% schema %}
+{
+  "name": "bully-common-section",
+  "tag": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "bully-common-section"
+    }
+  ]
+}
+{% endschema %}
+
+
+<style>
+  .bully-pricing-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 4rem 1rem;
+    background-color: #f6f6f6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .bully-pricing-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  .bully-pricing-content {
+    background-color: #ffe6ea;
+    padding: 3rem 2rem;
+    flex: 1;
+  }
+
+  .bully-pricing-content h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    background: linear-gradient(90deg, #db3225, #ff6b6b, #db3225);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: shine 3s linear infinite;
+  }
+
+  .bully-pricing-content h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #000;
+  }
+
+  .bully-pricing-content p {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .bully-pricing-image {
+    padding: 2rem;
+    background-color: #fff;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bully-pricing-image img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 2rem;
+  }
+
+  @keyframes shine {
+    0% {
+      background-position: 200% center;
+    }
+    100% {
+      background-position: -200% center;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .bully-pricing-container {
+      flex-direction: row;
+    }
+
+    .bully-pricing-content {
+      padding: 4rem;
+    }
+  }
+</style>
+
+<section class="bully-pricing-section">
+  <div class="bully-pricing-container">
+    <div class="bully-pricing-content">
+      <h2>Pricing & Special Offers</h2>
+
+      <h4>One-Time Purchase</h4>
+      <p>Buy any individual product at full price.<br>
+      Option to add complementary products at a discount at checkout.</p>
+
+      <h4>Subscription Model</h4>
+      <p>Save 10% on your order when you subscribe for monthly deliveries.<br>
+      Mix & match different chews each month.<br>
+      Flexibility to pause, skip, or cancel anytime.</p>
+
+      <h4>Bundle & Save Option</h4>
+      <p>Buy 2, Get 10% Off<br>
+      Buy 3+, Get 15% Off<br>
+      Subscription + Bundle = Max 15% Off</p>
+    </div>
+    <div class="bully-pricing-image">
+      <img src="https://cdn.shopify.com/s/files/1/2222/5817/files/DSC08983_668ad53e-2585-4fd1-bfcb-ca33fda6f877.png?v=1743086693" alt="Dog with treat">
+    </div>
+  </div>
+</section>
+
+
+<style>
+  .faq-section {
+    padding: 5rem 1rem;
+    background: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .faq-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .faq-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .faq-accordion {
+    border-top: 1px solid #eee;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #eee;
+  }
+
+  .faq-question {
+    cursor: pointer;
+    padding: 1.2rem 1rem;
+    font-weight: 600;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+    position: relative;
+  }
+
+  .faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 1rem;
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+  }
+
+  .faq-question.active::after {
+    content: '-';
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 1rem;
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  .faq-answer.open {
+    padding: 1rem;
+    max-height: 500px;
+  }
+</style>
+
+<section class="faq-section">
+  <div class="faq-wrapper">
+    <h2 class="faq-title">Frequently Asked Questions (FAQ)</h2>
+    <div class="faq-accordion">
+      <div class="faq-item">
+        <button class="faq-question">What makes Bonez Bully Sticks different from other brands?</button>
+        <div class="faq-answer">
+          Our bully sticks are made from 100% real beef, slow-roasted for maximum flavor, and free from fillers, rawhide, or artificial preservatives. They meet the highest USDA and FDA safety standards and are sourced in the USA.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Are these chews safe for puppies?</button>
+        <div class="faq-answer">
+          Yes! Our bully sticks and natural chews are fully digestible and safe for puppies. However, always supervise your pet while chewing.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How long do Bonez Bully Sticks last?</button>
+        <div class="faq-answer">
+          The durability depends on your dog’s chewing habits. For moderate chewers, a stick can last several hours. If you're looking for an even longer-lasting option, Madeira Cheese Chews are a great choice.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How does the subscription model work?</button>
+        <div class="faq-answer">
+          You can save 10% by subscribing to receive your dog's favorite chews every month. You can pause, skip, or cancel anytime with no commitments.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling;
+      const isOpen = answer.classList.contains('open');
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+      if (!isOpen) {
+        answer.classList.add('open');
+        btn.classList.add('active');
+      }
+    });
+  });
+</script>
+
+
+
+<section class="testimonials-section">
+  <div class="section-header">
+    <h2>See Why Dog Owners Love Us!</h2>
+  </div>
+  
+  <div class="testimonials-slider">
+    <!-- Slide 1 -->
+    <div class="testimonial-slide active" style="background-image: url('https://cdn.shopify.com/s/files/1/2222/5817/files/mountain-dog-on-chaise-longue.jpg?v=1743105405')">
+      <div class="slide-overlay"></div>
+      <div class="testimonial-card">
+        <div class="rating">★★★★★</div>
+        <h3 class="testimonial-title">Worth every penny – and then some.</h3>
+        <p class="testimonial-content">"I was hesitant at first because of the price, but after seeing how long these bully sticks last and how clean my dog's teeth look, I'm a believer. Zero digestive issues, and she LOVES them. I'm on the subscription now. Do it!"</p>
+      </div>
+    </div>
+    
+    <!-- Slide 2 -->
+    <div class="testimonial-slide" style="background-image: url('https://cdn.shopify.com/s/files/1/2222/5817/files/mountain-dog-on-chaise-longue.jpg?v=1743105405')">
+      <div class="slide-overlay"></div>
+      <div class="testimonial-card">
+        <div class="rating">★★★★★</div>
+        <h3 class="testimonial-title">The only chew my dog doesn't finish in 10 minutes!</h3>
+        <p class="testimonial-content">"I've tried every treat on the market and nothing keeps my Rottweiler busy like Bonez Bully Sticks. They last forever, don't smell awful like other brands, and he actually gets excited when the box arrives. Total game changer!"</p>
+      </div>
+    </div>
+    
+    <!-- Slide 3 -->
+    <div class="testimonial-slide" style="background-image: url('https://cdn.shopify.com/s/files/1/2222/5817/files/mountain-dog-on-chaise-longue.jpg?v=1743105405')">
+      <div class="slide-overlay"></div>
+      <div class="testimonial-card">
+        <div class="rating">★★★★★</div>
+        <h3 class="testimonial-title">Great value and quality!</h3>
+        <p class="testimonial-content">"I've tried cheaper bully sticks before, but they just don't compare. These are thicker, last longer, and I know I'm giving my dog something safe and nutritious. You get what you pay for—Bonez is worth it."</p>
+      </div>
+    </div>
+    
+    <!-- Slide 4 -->
+    <div class="testimonial-slide" style="background-image: url('https://cdn.shopify.com/s/files/1/2222/5817/files/mountain-dog-on-chaise-longue.jpg?v=1743105405')">
+      <div class="slide-overlay"></div>
+      <div class="testimonial-card">
+        <div class="rating">★★★★★</div>
+        <h3 class="testimonial-title">Finally, a chew that doesn't stink up my house.</h3>
+        <p class="testimonial-content">"Other bully sticks I've tried smell so bad I had to light a candle. Bonez Bully Sticks are totally odor-free, and my golden retriever LOVES them. Clean, long-lasting, and no mess—what more could you ask for?"</p>
+      </div>
+    </div>
+    
+    <!-- Slide 5 -->
+    <div class="testimonial-slide" style="background-image: url('https://cdn.shopify.com/s/files/1/2222/5817/files/mountain-dog-on-chaise-longue.jpg?v=1743105405')">
+      <div class="slide-overlay"></div>
+      <div class="testimonial-card">
+        <div class="rating">★★★★★</div>
+        <h3 class="testimonial-title">My picky dog is obsessed.</h3>
+        <p class="testimonial-content">"My Frenchie turns his nose up at most chews, but Bonez Bully Sticks? He won't put it down. I love that they're natural, odor-free, and sourced with quality in mind. I feel good giving these to him."</p>
+      </div>
+    </div>
+    
+    <!-- Slide 6 -->
+    <div class="testimonial-slide" style="background-image: url('https://cdn.shopify.com/s/files/1/2222/5817/files/mountain-dog-on-chaise-longue.jpg?v=1743105405')">
+      <div class="slide-overlay"></div>
+      <div class="testimonial-card">
+        <div class="rating">★★★★★</div>
+        <h3 class="testimonial-title">Perfect for teething pups.</h3>
+        <p class="testimonial-content">"I started giving these to my 5-month-old Chocolate Labrador puppy during his teething phase and wow—they saved my furniture. He chews for hours and they hold up really well. Plus, they're healthy and all-natural. Big win!"</p>
+      </div>
+    </div>
+    
+    <!-- Navigation arrows -->
+    <button class="slider-nav prev" aria-label="Previous testimonial">‹</button>
+    <button class="slider-nav next" aria-label="Next testimonial">›</button>
+    
+    <!-- Pagination dots -->
+    <div class="slider-pagination">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+<style>
+.testimonials-section {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: #f5f5f5;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  color: #000;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.testimonials-slider {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.testimonial-slide {
+  display: none;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 500px;
+  padding: 2rem;
+  animation: fadeIn 0.5s ease;
+}
+
+.testimonial-slide.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.testimonial-card {
+  background: rgba(0,0,0,.5);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 600px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.rating {
+  color: #FFD700;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.testimonial-title {
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.testimonial-content {
+  font-size: 1rem;
+  color: #fff;
+  line-height: 1.6;
+}
+
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.8);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.slider-nav:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+.slider-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 0.5rem;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: white;
+  transform: scale(1.2);
+}
+
+.dot:hover {
+  background: white;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .testimonials-section {
+    padding: 2rem 1rem;
+  }
+  
+  .testimonial-slide {
+    min-height: 400px;
+    padding: 1rem;
+  }
+  
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+  
+  .slider-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  .testimonial-title {
+    font-size: 1.1rem;
+  }
+  
+  .testimonial-content {
+    font-size: 0.9rem;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const slides = document.querySelectorAll('.testimonial-slide');
+  const dots = document.querySelectorAll('.dot');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+  let currentSlide = 0;
+  
+  function showSlide(n) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+  
+  function nextSlide() {
+    showSlide(currentSlide + 1);
+  }
+  
+  function prevSlide() {
+    showSlide(currentSlide - 1);
+  }
+  
+  // Auto-rotate slides every 5 seconds
+  let slideInterval = setInterval(nextSlide, 5000);
+  
+  // Pause on hover
+  const slider = document.querySelector('.testimonials-slider');
+  slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
+  slider.addEventListener('mouseleave', () => {
+    slideInterval = setInterval(nextSlide, 5000);
+  });
+  
+  // Navigation controls
+  nextBtn.addEventListener('click', () => {
+    nextSlide();
+    clearInterval(slideInterval);
+  });
+  
+  prevBtn.addEventListener('click', () => {
+    prevSlide();
+    clearInterval(slideInterval);
+  });
+  
+  // Dot navigation
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      showSlide(index);
+      clearInterval(slideInterval);
+    });
+  });
+});
+</script>
+
+
+
+<section class="premium-dog-treats">
+  <div class="container">
+    <div class="intro-column">
+      <h2 class="section-heading">YOUR DOG DESERVES THE BEST</h2>
+      <p class="section-subheading">Don't settle for artificial, low-quality chews. Give your dog a healthy, delicious treat that lasts.</p>
+      <div class="divider-line"></div>
+      <ul class="benefits-list">
+        <li>No Rawhide, No Fillers – Just Real Beef</li>
+        <li>Supports Joint & Dental Health</li>
+        <li>Long-Lasting Chews for Dogs of All Sizes</li>
+        <li>Meets the Highest Safety & Quality Standards</li>
+      </ul>
+    </div>
+    
+    <div class="products-grid">
+      <!-- Product 1 -->
+      <div class="product-card">
+        <div class="product-image-wrapper">
+          <img src="https://cdn.shopify.com/s/files/1/2222/5817/files/KANGAROOWHITEBG.png?v=1743086243" 
+               alt="South African Peanut Chews" 
+               class="product-image">
+        </div>
+        <div class="product-details">
+          <h3 class="product-title">South African Peanut Chews (6-pack)</h3>
+          <p class="product-price">$29.99</p>
+          <ul class="product-features">
+            <li>Made with real peanut butter for a taste dogs love</li>
+            <li>Sourced from South Africa with rosehip formula for joint health</li>
+            <li>Stimulates appetite in picky eaters</li>
+            <li>Free from additives and preservatives</li>
+          </ul>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+      
+      <!-- Product 2 -->
+      <div class="product-card">
+        <div class="product-image-wrapper">
+          <img src="https://cdn.shopify.com/s/files/1/2222/5817/files/MADEIRA.png?v=1743086488" 
+               alt="Madeira Cheese Chew" 
+               class="product-image">
+        </div>
+        <div class="product-details">
+          <h3 class="product-title">Madeira Cheese Chew (800g)</h3>
+          <p class="product-price">$29.99</p>
+          <ul class="product-features">
+            <li>Made in Portugal with 100% natural ingredients</li>
+            <li>Lactose free and gluten free for easy digestion</li>
+            <li>Cleans teeth naturally while providing hours of enjoyment</li>
+            <li>A great source of protein and essential nutrients</li>
+          </ul>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.premium-dog-treats {
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #fff7f4 0%, #fefefe 100%);
+  font-family: 'Arial', sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.intro-column {
+  flex: 1;
+  min-width: 300px;
+  padding: 1rem;
+}
+
+.section-heading {
+  font-size: 2rem;
+  color: #2a2a2a;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.section-subheading {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.divider-line {
+  height: 2px;
+  background: linear-gradient(90deg, #db3225, transparent);
+  margin: 1.5rem 0;
+  width: 80%;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.benefits-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.benefits-list li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #db3225;
+  font-weight: bold;
+}
+
+.products-grid {
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.product-image-wrapper {
+  padding: 1.5rem;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.product-image {
+  max-width: 100%;
+  height: 200px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.product-details {
+  padding: 1.5rem;
+}
+
+.product-title {
+  font-size: 1.3rem;
+  color: #2a2a2a;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  color: #db3225;
+  margin: 0 0 1rem;
+  font-weight: 700;
+}
+
+.product-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.product-features li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.product-features li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #db3225;
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #db3225;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #c02a1e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(219, 50, 37, 0.2);
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .intro-column {
+    text-align: center;
+  }
+  
+  .divider-line {
+    width: 100%;
+    margin: 1.5rem auto;
+  }
+  
+  .benefits-list li {
+    text-align: left;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+
+
+<section class="bully-sticks-section">
+  <div class="bl-container">
+    <div class="section-header">
+      <h2>WHAT MAKES BONEZ BULLY STICKS BETTER?</h2>
+      <div class="divider">
+
+      </div>
+      <p class="subheader">
+        Not all dog chews are created equal. Unlike mass produced,
+        low-quality alternatives, Bonez Bully Sticks provide
+        <strong>maximum nutrition, safety, and enjoyment</strong> for your
+        furry companion.
+      </p>
+    </div>
+
+    <div class="benefits-showcase">
+      <div class="benefits-text">
+        <div class="benefit-item">
+          <img
+            src="https://placehold.co/60x60/EEE/31343C?text=NoFillers"
+            alt="No fillers icon"
+            class="benefit-icon"
+          />
+          <h3>No Rawhide, No Fillers</h3>
+          <p>Just 100% Real Beef</p>
+        </div>
+        <div class="benefit-item">
+          <img
+            src="https://placehold.co/60x60/EEE/31343C?text=LongLasting"
+            alt="Long lasting icon"
+            class="benefit-icon"
+          />
+          <h3>Long-Lasting Chews</h3>
+          <p>for Dogs of All Sizes</p>
+        </div>
+      </div>
+
+
+      <div class="benefits-text">
+        <div class="benefit-item">
+          <img
+            src="https://placehold.co/60x60/EEE/31343C?text=JointHealth"
+            alt="Joint health icon"
+            class="benefit-icon"
+          />
+          <h3>Supports Joint & Dental Health</h3>
+        </div>
+        <div class="benefit-item">
+          <img
+            src="https://placehold.co/60x60/EEE/31343C?text=Safety"
+            alt="Quality icon"
+            class="benefit-icon"
+          />
+          <h3>Meets the Highest Safety Standards</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-cta">
+      <div class="cta-banner">
+        <h3>
+          MORE THAN JUST BULLY STICKS: EXPLORE OUR NATURAL CHEW COLLECTION
+        </h3>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/403/403882.png"
+          alt="Dog bone"
+          class="cta-icon"
+        />
+      </div>
+    </div>
+
+    <div class="video-bl-container">
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/ZvGO9hBUFUA"
+          title="Bonez Bully Sticks"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="video-cta">
+        <p>
+          Watch how Bonez Bully Sticks are made and why dogs love them!
+        </p>
+        <div class="play-icon-circle">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="#ffffff"
+            width="24px"
+            height="24px"
+          >
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="size-options">
+      <h3>
+        BULLY STICKS<br /><span>AVAILABLE IN TWO SIZES:</span>
+      </h3>
+
+      <div class="size-grid">
+        <div class="size-option">
+          <div class="size-badge">BEST SELLER</div>
+          <h4>
+            5-8 inches<br /><span>(12 pack)</span>
+          </h4>
+          <div class="price-comparison">
+            <p class="original-price"><s>$99.99</s></p>
+            <p class="sale-price">$49.99</p>
+          </div>
+          <p class="savings">Save 50%</p>
+        </div>
+        <div class="size-option popular">
+          <div class="size-badge">MOST POPULAR</div>
+          <h4>
+            9-12 inches<br /><span>(12 pack)</span>
+          </h4>
+          <div class="price-comparison">
+            <p class="original-price"><s>$119.99</s></p>
+            <p class="sale-price">$69.99</p>
+          </div>
+          <p class="savings">Save 42%</p>
+        </div>
+      </div>
+
+      <div class="size-divider">
+
+      </div>
+    </div>
+
+    <div class="product-gallery">
+      <div class="gallery-item">
+        <img
+          src="https://cdn.shopify.com/s/files/1/2222/5817/files/BULLYSTICK_MEDIUM_DOG_1.png?v=1743103159"
+          alt="Bully Stick for Medium Dogs"
+          loading="lazy"
+        />
+        <p class="image-caption">Perfect for small to medium breeds</p>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://cdn.shopify.com/s/files/1/2222/5817/files/BULLYSTICK_MEDIUM_DOG_2.png?v=1743103159"
+          alt="Bully Stick for Medium Dogs"
+          loading="lazy"
+        />
+        <p class="image-caption">Long-lasting enjoyment</p>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://cdn.shopify.com/s/files/1/2222/5817/files/BULLYSTICK_MEDIUM_DOG_3.png?v=1743103033"
+          alt="Bully Stick for Medium Dogs"
+          loading="lazy"
+        />
+        <p class="image-caption">Natural dental care</p>
+      </div>
+    </div>
+
+    <div class="quantity-options">
+      <div class="quantity-header">
+        <h4>SELECT YOUR PACK SIZE</h4>
+      </div>
+      <div class="btn-group">
+        <button class="quantity-btn">
+          <span>Buy 3 Sticks</span>
+          <span class="btn-badge">+ Save</span>
+        </button>
+        <button class="quantity-btn">
+          <span>Buy 6 Sticks</span>
+          <span class="btn-badge">+ Free Shipping</span>
+        </button>
+        <button class="quantity-btn highlighted">
+          <span>Buy 9 Sticks</span>
+          <span class="btn-badge">Best Value</span>
+        </button>
+        <button class="quantity-btn">
+          <span>Buy 12 Sticks</span>
+          <span class="btn-badge">+ Free Gift</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bully-sticks-section {
+  padding: 5rem 2rem;
+  background: linear-gradient(to bottom, #fff7f4 0%, #fefefe 100%);
+  font-family: 'Arial', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.bully-sticks-section .bl-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.bully-sticks-section .section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.bully-sticks-section .section-header h2 {
+  font-size: 2.5rem;
+  color: #2a2a2a;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+
+.bully-sticks-section .divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #db3225, transparent);
+  width: 300px;
+  margin: 1.5rem auto;
+  position: relative;
+}
+
+.bully-sticks-section .subheader {
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.bully-sticks-section .subheader strong {
+  color: #db3225;
+  font-weight: 600;
+}
+
+.bully-sticks-section .benefits-showcase {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 4rem 0;
+  gap: 2rem;
+}
+
+.bully-sticks-section .benefits-text {
+  flex: 1;
+  min-width: 250px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  flex-wrap: nowrap;
+}
+
+.bully-sticks-section .benefit-item {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.bully-sticks-section .benefit-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.bully-sticks-section .benefit-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.1));
+}
+
+.bully-sticks-section .benefit-item h3 {
+  font-size: 1.4rem;
+  color: #2a2a2a;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.bully-sticks-section .benefit-item p {
+  font-size: 1.1rem;
+  color: #777;
+  font-weight: 500;
+}
+
+.bully-sticks-section .collection-cta {
+  margin: 5rem 0;
+}
+
+.bully-sticks-section .cta-banner {
+  background: #db3225;
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.bully-sticks-section .cta-banner h3 {
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+}
+
+.bully-sticks-section .cta-icon {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.2;
+  width: 100px;
+  height: 100px;
+}
+
+.bully-sticks-section .video-bl-container {
+  margin: 5rem 0;
+  position: relative;
+}
+
+.bully-sticks-section .video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.bully-sticks-section .video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bully-sticks-section .video-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.bully-sticks-section .video-cta p {
+  font-size: 1.1rem;
+  color: #555;
+  font-weight: 500;
+  margin: 0;
+}
+
+.bully-sticks-section .play-icon-circle {
+  width: 40px;
+  height: 40px;
+  background: #db3225;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bully-sticks-section .size-options {
+  text-align: center;
+  margin: 5rem 0;
+}
+
+.bully-sticks-section .size-options h3 {
+  font-size: 1.8rem;
+  color: #2a2a2a;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.bully-sticks-section .size-options h3 span {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #777;
+  margin-top: 0.5rem;
+  text-transform: none;
+}
+
+.bully-sticks-section .size-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.bully-sticks-section .size-option {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  min-width: 250px;
+  flex: 1;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.bully-sticks-section .size-option.popular {
+  border: 2px solid #db3225;
+  transform: translateY(-10px);
+}
+
+.bully-sticks-section .size-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #db3225;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bully-sticks-section .size-option h4 {
+  font-size: 1.4rem;
+  color: #2a2a2a;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.bully-sticks-section .size-option h4 span {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #777;
+}
+
+.bully-sticks-section .price-comparison {
+  margin: 1.5rem 0;
+}
+
+.bully-sticks-section .original-price {
+  color: #999;
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.bully-sticks-section .sale-price {
+  font-size: 1.8rem;
+  color: #db3225;
+  font-weight: 700;
+}
+
+.bully-sticks-section .savings {
+  font-size: 0.9rem;
+  color: white;
+  background: #db3225;
+  padding: 3px 10px;
+  border-radius: 10px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.bully-sticks-section .size-divider {
+  height: 1px;
+  background: #eee;
+  width: 80%;
+  margin: 3rem auto;
+  position: relative;
+}
+
+.bully-sticks-section .product-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+.bully-sticks-section .gallery-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.bully-sticks-section .gallery-item:hover {
+  transform: translateY(-10px);
+}
+
+.bully-sticks-section .gallery-item img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.bully-sticks-section .image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(219, 50, 37, 0.8);
+  color: white;
+  padding: 1rem;
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.bully-sticks-section .quantity-options {
+  margin: 4rem 0;
+  text-align: center;
+}
+
+.bully-sticks-section .quantity-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.bully-sticks-section .quantity-header h4 {
+  font-size: 1.4rem;
+  color: #2a2a2a;
+  margin: 0;
+  font-weight: 700;
+}
+
+.bully-sticks-section .btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.bully-sticks-section .quantity-btn {
+  padding: 15px 30px;
+  background: white;
+  color: #2a2a2a;
+  border: 2px solid #db3225;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bully-sticks-section .quantity-btn span {
+  position: relative;
+  z-index: 2;
+}
+
+.bully-sticks-section .quantity-btn .btn-badge {
+  font-size: 0.8rem;
+  background: #db3225;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 10px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.bully-sticks-section .quantity-btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #db3225;
+  transition: width 0.3s ease;
+  z-index: 1;
+}
+
+.bully-sticks-section .quantity-btn:hover {
+  color: white;
+}
+
+.bully-sticks-section .quantity-btn:hover:before {
+  width: 100%;
+}
+
+.bully-sticks-section .quantity-btn:hover .btn-badge {
+  background: white;
+  color: #db3225;
+}
+
+.bully-sticks-section .quantity-btn.highlighted {
+  background: #db3225;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(219, 50, 37, 0.3);
+}
+
+.bully-sticks-section .quantity-btn.highlighted .btn-badge {
+  background: white;
+  color: #db3225;
+}
+
+@media (max-width: 768px) {
+  .bully-sticks-section .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .bully-sticks-section .benefits-showcase {
+    flex-direction: column;
+  }
+
+  .bully-sticks-section .benefit-item {
+    padding: 1.5rem;
+  }
+
+  .bully-sticks-section .cta-banner h3 {
+    font-size: 1.2rem;
+  }
+
+  .bully-sticks-section .cta-icon {
+    display: none;
+  }
+
+  .bully-sticks-section .size-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bully-sticks-section .size-option {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .bully-sticks-section .btn-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bully-sticks-section .quantity-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .bully-sticks-section .gallery-item img {
+    height: 250px;
+  }
+}
+</style>

@@ -1,0 +1,258 @@
+<section class="header-v2">
+  <div class="header-container">
+    <header class="header-main" id="site-header">
+      <div class="">
+        <div class="header__content">
+          <!-- Logo -->
+          <div class="header__logo-wrapper">
+            <a href="{{ routes.root_url }}" class="header__logo-link">
+              {%- if section.settings.logo != blank -%}
+                <img
+                  src="{{ section.settings.logo | img_url: 'master' }}"
+                  alt="{{ section.settings.logo.alt | default: shop.name }}"
+                  width="{{ section.settings.logo_width }}"
+                  class="header__logo"
+                  height=""
+                  width=""
+                >
+              {%- else -%}
+                <span class="h2">{{ shop.name }}</span>
+              {%- endif -%}
+            </a>
+          </div>
+
+          <!-- Navigation -->
+          <nav class="header__nav" role="navigation">
+            <ul class="header__menu list-unstyled">
+              {%- for link in section.settings.menu.links -%}
+                <li class="header__menu-item">
+                  <a
+                    href="{{ link.url }}"
+                    class="header__menu-link{% if link.active %} header__menu-link--active{% endif %}"
+                  >
+                    {{ link.title }}
+                  </a>
+                  {%- if link.links != blank -%}
+                    <ul class="header__submenu list-unstyled">
+                      {%- for childlink in link.links -%}
+                        <li class="header__submenu-item">
+                          <a
+                            href="{{ childlink.url }}"
+                            class="header__submenu-link{% if childlink.active %} header__submenu-link--active{% endif %}"
+                          >
+                            {{ childlink.title }}
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+
+          <!-- Icons (Search and Cart) -->
+          <div class="header__icons">
+            <button type="button" class="header__icon header__icon--search" aria-expanded="false">
+              <span class="visually-hidden"></span>
+              {% render 'icon-search' %}
+            </button>
+
+            <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart">
+              <span class="visually-hidden"></span>
+              {% render 'icon-cart' %}
+              <span class="cart-count-bubble{% if cart.item_count == 0 %} hide{% endif %}">
+                {%- if cart.item_count < 100 -%}
+                  <span data-cart-count>{{ cart.item_count }}</span>
+                {%- endif -%}
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</section>
+
+<style>
+  .header-v2 {
+    padding: 8px 7%;
+  }
+  .header-v2 .header-container {
+    position: relative;
+    z-index: 10;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .header-v2 .header-main {
+    /* padding: 15px 0; */
+  }
+
+  .header-v2 .header__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-v2 .header__logo {
+    max-height: 60px;
+    width: auto;
+    margin-top: 12px;
+  }
+
+  .header-v2 .header__menu {
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header-v2 .header__menu-item {
+    position: relative;
+    margin: 0 15px;
+  }
+
+  .header-v2 .header__menu-link {
+    display: block;
+    padding: 5px 0;
+    color: #333333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .header-v2 .header__menu-link:hover,
+  .header-v2 .header__menu-link--active {
+    color: #000000;
+  }
+
+  .header-v2 .header__submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    z-index: 5;
+  }
+
+  .header-v2 .header__menu-item:hover .header__submenu {
+    display: block;
+  }
+
+  .header-v2 .header__submenu-link {
+    display: block;
+    padding: 8px 20px;
+    color: #333333;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .header-v2 .header__submenu-link:hover,
+  .header-v2 .header__submenu-link--active {
+    background-color: #f5f5f5;
+  }
+
+  .header-v2 .header__icons {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-v2 .header__icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 5px;
+    position: relative;
+  }
+
+  .header-v2 .header__icon svg {
+    /* width: 20px;
+    height: 20px;
+    fill: #333333; */
+  }
+
+  .header-v2 .cart-count-bubble {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(50%, -50%);
+  }
+
+  .header-v2 .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  .header-v2 .list-unstyled {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media screen and (max-width: 990px) {
+    .header-v2 .header__menu {
+      display: none;
+    }
+
+    /* Add mobile menu button here if needed */
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Header V2",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 100,
+      "unit": "px",
+      "label": "Logo width"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "default": true,
+      "label": "Sticky header"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header V2"
+    }
+  ]
+}
+{% endschema %}

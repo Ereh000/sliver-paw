@@ -1,0 +1,502 @@
+<div class="image-with-content" id="image-with-content-{{ section.id }}">
+  <div class="page-width">
+    <div class="section-header">
+      <div class="left">
+        {% if section.settings.heading != blank %}
+          <h2 class="image-with-content__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.subheading != blank %}
+          <div class="image-with-content__subheading">{{ section.settings.subheading }}</div>
+        {% endif %}
+      </div>
+      <div class="right">
+        {% if section.settings.button_label != blank %}
+          <div class="image-with-content__button-wrapper">
+            <a href="{{ section.settings.button_link }}" class="image-with-content__button">
+              {{ section.settings.button_label }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="image-with-content__container">
+      <div class="image-with-content__text-column">
+        <div class="image-with-content__features">
+          {% for block in section.blocks %}
+            {% if block.type == 'feature' %}
+              <div class="image-with-content__feature" {{ block.shopify_attributes }}>
+                <div class="image-with-content__feature-icon">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12L10 17L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="image-with-content__feature-content">
+                  <h3 class="image-with-content__feature-title">{{ block.settings.title }}</h3>
+                  <div class="image-with-content__feature-text">{{ block.settings.text }}</div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="image-with-content__image-column">
+        <div class="image-with-content__image-wrapper">
+          {% if section.settings.image != blank %}
+            <img
+              srcset="
+                {% if section.settings.image.width >= 375 %}{{ section.settings.image | img_url: '375x' }} 375w,{% endif %}
+                {% if section.settings.image.width >= 550 %}{{ section.settings.image | img_url: '550x' }} 550w,{% endif %}
+                {% if section.settings.image.width >= 750 %}{{ section.settings.image | img_url: '750x' }} 750w,{% endif %}
+                {% if section.settings.image.width >= 1100 %}{{ section.settings.image | img_url: '1100x' }} 1100w,{% endif %}
+                {{ section.settings.image | img_url: 'master' }} {{ section.settings.image.width }}w
+              "
+              src="{{ section.settings.image | img_url: '550x' }}"
+              sizes="(min-width: 750px) 50vw, 100vw"
+              alt="{{ section.settings.image.alt | escape }}"
+              loading="lazy"
+              width="{{ section.settings.image.width }}"
+              height="{{ section.settings.image.height }}"
+              class="image-with-content__image"
+            >
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+
+          {% if section.settings.show_circle_background %}
+            <div class="image-with-content__circle-background"></div>
+          {% endif %}
+
+          {% if section.settings.show_paw_icons %}
+            <div class="image-with-content__paw-icons">
+              <div class="paw-icon paw-icon--1">
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M378.3,86.7c11,19.1,3.8,44.1-16.1,55.8s-45.3,5.2-56.3-13.9s-3.8-44.1,16.1-55.8S367.3,67.6,378.3,86.7z M206.1,86.7 c11,19.1,3.8,44.1-16.1,55.8s-45.3,5.2-56.3-13.9s-3.8-44.1,16.1-55.8S195.1,67.6,206.1,86.7z M489,226.8 c9.6,19.9-0.5,44.2-22.5,54.3c-22,10.1-47.7,2.1-57.3-17.8s0.5-44.2,22.5-54.3C453.7,198.9,479.4,206.9,489,226.8z M102.5,209 c22,10.1,32.1,34.4,22.5,54.3c-9.6,19.9-35.3,27.9-57.3,17.8c-22-10.1-32.1-34.4-22.5-54.3C54.8,206.9,80.5,198.9,102.5,209z M329.8,300.7c-32.5-55.7-115.2-55.7-147.7,0c-32.5,55.7-32.5,143.8,0,199.5c32.5,55.7,115.2,55.7,147.7,0 C362.3,444.5,362.3,356.4,329.8,300.7z"/>
+                </svg>
+              </div>
+              <div class="paw-icon paw-icon--2">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M378.3,86.7c11,19.1,3.8,44.1-16.1,55.8s-45.3,5.2-56.3-13.9s-3.8-44.1,16.1-55.8S367.3,67.6,378.3,86.7z M206.1,86.7 c11,19.1,3.8,44.1-16.1,55.8s-45.3,5.2-56.3-13.9s-3.8-44.1,16.1-55.8S195.1,67.6,206.1,86.7z M489,226.8 c9.6,19.9-0.5,44.2-22.5,54.3c-22,10.1-47.7,2.1-57.3-17.8s0.5-44.2,22.5-54.3C453.7,198.9,479.4,206.9,489,226.8z M102.5,209 c22,10.1,32.1,34.4,22.5,54.3c-9.6,19.9-35.3,27.9-57.3,17.8c-22-10.1-32.1-34.4-22.5-54.3C54.8,206.9,80.5,198.9,102.5,209z M329.8,300.7c-32.5-55.7-115.2-55.7-147.7,0c-32.5,55.7-32.5,143.8,0,199.5c32.5,55.7,115.2,55.7,147.7,0 C362.3,444.5,362.3,356.4,329.8,300.7z"/>
+                </svg>
+              </div>
+              <div class="paw-icon paw-icon--3">
+                <svg
+                  width="25"
+                  height="25"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M378.3,86.7c11,19.1,3.8,44.1-16.1,55.8s-45.3,5.2-56.3-13.9s-3.8-44.1,16.1-55.8S367.3,67.6,378.3,86.7z M206.1,86.7 c11,19.1,3.8,44.1-16.1,55.8s-45.3,5.2-56.3-13.9s-3.8-44.1,16.1-55.8S195.1,67.6,206.1,86.7z M489,226.8 c9.6,19.9-0.5,44.2-22.5,54.3c-22,10.1-47.7,2.1-57.3-17.8s0.5-44.2,22.5-54.3C453.7,198.9,479.4,206.9,489,226.8z M102.5,209 c22,10.1,32.1,34.4,22.5,54.3c-9.6,19.9-35.3,27.9-57.3,17.8c-22-10.1-32.1-34.4-22.5-54.3C54.8,206.9,80.5,198.9,102.5,209z M329.8,300.7c-32.5-55.7-115.2-55.7-147.7,0c-32.5,55.7-32.5,143.8,0,199.5c32.5,55.7,115.2,55.7,147.7,0 C362.3,444.5,362.3,356.4,329.8,300.7z"/>
+                </svg>
+              </div>
+              <div class="paw-icon paw-icon--4">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M378.3,86.7c11,19.1,3.8,44.1-16.1,55.8s-45.3,5.2-56.3-13.9s-3.8-44.1,16.1-55.8S367.3,67.6,378.3,86.7z M206.1,86.7 c11,19.1,3.8,44.1-16.1,55.8s-45.3,5.2-56.3-13.9s-3.8-44.1,16.1-55.8S195.1,67.6,206.1,86.7z M489,226.8 c9.6,19.9-0.5,44.2-22.5,54.3c-22,10.1-47.7,2.1-57.3-17.8s0.5-44.2,22.5-54.3C453.7,198.9,479.4,206.9,489,226.8z M102.5,209 c22,10.1,32.1,34.4,22.5,54.3c-9.6,19.9-35.3,27.9-57.3,17.8c-22-10.1-32.1-34.4-22.5-54.3C54.8,206.9,80.5,198.9,102.5,209z M329.8,300.7c-32.5-55.7-115.2-55.7-147.7,0c-32.5,55.7-32.5,143.8,0,199.5c32.5,55.7,115.2,55.7,147.7,0 C362.3,444.5,362.3,356.4,329.8,300.7z"/>
+                </svg>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+    #image-with-content-{{ section.id }} {
+      padding: 60px 0;
+      background-color: {{ section.settings.background_color }};
+      position: relative;
+      overflow: hidden;
+    }
+
+    .image-with-content__container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .image-with-content__text-column {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .image-with-content__image-column {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .image-with-content__heading {
+      font-size: {{ section.settings.heading_size }}px;
+      line-height: 1.2;
+      margin: 0 0 15px;
+      color: {{ section.settings.heading_color }};
+      font-weight: 700;
+    }
+
+    .image-with-content__subheading {
+      font-size: {{ section.settings.subheading_size }}px;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      color: {{ section.settings.text_color }};
+    }
+
+    .image-with-content__features {
+      margin-bottom: 30px;
+    }
+
+    .image-with-content__feature {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .image-with-content__feature-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      margin-right: 15px;
+      color: {{ section.settings.accent_color }};
+    }
+
+    .image-with-content__feature-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 5px;
+      color: {{ section.settings.heading_color }};
+    }
+
+    .image-with-content__feature-text {
+      font-size: 16px;
+      line-height: 1.5;
+      color: {{ section.settings.text_color }};
+    }
+
+    .image-with-content__button-wrapper {
+      margin-top: 30px;
+    }
+
+    .image-with-content__button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: {{ section.settings.button_background }};
+      color: {{ section.settings.button_text_color }};
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .image-with-content__button:hover {
+      background-color: {{ section.settings.button_background_hover }};
+      transform: translateY(-2px);
+    }
+
+    .image-with-content__image-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 450px;
+    }
+
+    .image-with-content__image {
+      display: block;
+      width: 100%;
+      height: auto;
+      position: relative;
+      z-index: 2;
+      border-radius: 8px;
+    }
+
+    .image-with-content__circle-background {
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      background-color: {{ section.settings.circle_background_color }};
+      border-radius: 50%;
+      top: 10%;
+      left: 10%;
+      z-index: 1;
+    }
+
+    .image-with-content__paw-icons {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .paw-icon {
+      position: absolute;
+      color: {{ section.settings.paw_icon_color }};
+      opacity: 0.5;
+    }
+
+    .paw-icon--1 {
+      top: 15%;
+      right: 10%;
+    }
+
+    .paw-icon--2 {
+      top: 40%;
+      left: 5%;
+    }
+
+    .paw-icon--3 {
+      bottom: 30%;
+      right: 15%;
+    }
+
+    .paw-icon--4 {
+      bottom: 10%;
+      left: 20%;
+    }
+
+    @media screen and (max-width: 749px) {
+      .image-with-content__container {
+        flex-direction: column-reverse;
+      }
+
+      .image-with-content__text-column,
+      .image-with-content__image-column {
+        width: 100%;
+      }
+
+      .image-with-content__heading {
+        font-size: {{ section.settings.heading_size | times: 0.8 }}px;
+      }
+
+      .image-with-content__subheading {
+        font-size: {{ section.settings.subheading_size | times: 0.9 }}px;
+      }
+    }
+
+    .section-header{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+</style>
+
+{% schema %}
+{
+  "name": "Image with Content",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFF0F0"
+    },
+    {
+      "type": "header",
+      "content": "Text content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "WHY CHOOSE BONEZ BULLY STICKS?",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 36,
+      "unit": "px",
+      "label": "Heading size"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "default": "#000000",
+      "label": "Heading color"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "default": "The Treat That Ticks Every Box for Happy, Healthy Dogs",
+      "label": "Subheading"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "default": 18,
+      "unit": "px",
+      "label": "Subheading size"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#333333",
+      "label": "Text color"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "default": "#C73232",
+      "label": "Accent color (checkmarks)"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "SHOP NOW",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "default": "#C73232",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_background_hover",
+      "default": "#A52828",
+      "label": "Button hover background"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "default": "#FFFFFF",
+      "label": "Button text color"
+    },
+    {
+      "type": "header",
+      "content": "Image settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_circle_background",
+      "default": true,
+      "label": "Show circle background"
+    },
+    {
+      "type": "color",
+      "id": "circle_background_color",
+      "default": "#C73232",
+      "label": "Circle background color"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_paw_icons",
+      "default": true,
+      "label": "Show paw icons"
+    },
+    {
+      "type": "color",
+      "id": "paw_icon_color",
+      "default": "#FFC0C0",
+      "label": "Paw icon color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "100% Natural & Single-Ingredient",
+          "label": "Feature title"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Made from real beef, free from additives & preservatives.",
+          "label": "Feature text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with Content",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "100% Natural & Single-Ingredient",
+            "text": "Made from real beef, free from additives & preservatives."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Cleans Teeth Naturally",
+            "text": "Reduces plaque & tartar for a fresher breath."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Fully Digestible & Safe",
+            "text": "Unlike rawhide, our bully sticks break down naturally in your dog's stomach."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Sourced & Made in the USA",
+            "text": "Complies with USDA, FDA, CHIA, and SQF safety standards."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Slow-Roasted for Maximum Flavor",
+            "text": "Packed with irresistible taste your dog will love."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
