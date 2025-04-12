@@ -1,0 +1,281 @@
+<div class="icon-with-text" id="icon-with-text-{{ section.id }}">
+  <div class="page-width">
+    <div class="icon-with-text__container">
+      {% if section.settings.heading != blank %}
+        <h2 class="icon-with-text__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      
+      <div class="icon-with-text__grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'icon_item' %}
+            <div class="icon-with-text__item" {{ block.shopify_attributes }}>
+              <div class="icon-with-text__icon-wrapper">
+                {% case block.settings.icon %}
+                  {% when 'shipping' %}
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M32 12H26V6H4C2.9 6 2 6.9 2 8V28H4C4 30.21 5.79 32 8 32C10.21 32 12 30.21 12 28H28C28 30.21 29.79 32 32 32C34.21 32 36 30.21 36 28H38V20L32 12ZM32 14.83L35.17 20H26V14.83H32ZM8 30C6.9 30 6 29.1 6 28C6 26.9 6.9 26 8 26C9.1 26 10 26.9 10 28C10 29.1 9.1 30 8 30ZM32 30C30.9 30 30 29.1 30 28C30 26.9 30.9 26 32 26C33.1 26 34 26.9 34 28C34 29.1 33.1 30 32 30Z" fill="currentColor"/>
+                    </svg>
+                  {% when 'money' %}
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20 4C11.16 4 4 11.16 4 20C4 28.84 11.16 36 20 36C28.84 36 36 28.84 36 20C36 11.16 28.84 4 20 4ZM20 8C22.08 8 23.8 9.64 23.94 11.8C23.42 11.92 23 12.4 23 13C23 13.6 23.4 14.08 23.94 14.2C23.8 16.36 22.08 18 20 18C17.8 18 16 16.2 16 14C16 11.8 17.8 10 20 10V8ZM20 32C17.92 32 16.2 30.36 16.06 28.2C16.58 28.08 17 27.6 17 27C17 26.4 16.6 25.92 16.06 25.8C16.2 23.64 17.92 22 20 22C22.2 22 24 23.8 24 26C24 28.2 22.2 30 20 30V32ZM28 22H26V18H28C29.1 18 30 17.1 30 16C30 14.9 29.1 14 28 14H26V12H28C30.2 12 32 13.8 32 16C32 18.2 30.2 20 28 20V22ZM14 26H12V28C12 29.1 11.1 30 10 30C8.9 30 8 29.1 8 28V26H6V28C6 30.2 7.8 32 10 32C12.2 32 14 30.2 14 28V26Z" fill="currentColor"/>
+                    </svg>
+                  {% when 'lock' %}
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M30 14H28V10C28 5.58 24.42 2 20 2C15.58 2 12 5.58 12 10V14H10C8.9 14 8 14.9 8 16V34C8 35.1 8.9 36 10 36H30C31.1 36 32 35.1 32 34V16C32 14.9 31.1 14 30 14ZM16 10C16 7.8 17.8 6 20 6C22.2 6 24 7.8 24 10V14H16V10ZM30 34H10V16H30V34ZM20 28C21.1 28 22 27.1 22 26C22 24.9 21.1 24 20 24C18.9 24 18 24.9 18 26C18 27.1 18.9 28 20 28Z" fill="currentColor"/>
+                    </svg>
+                  {% when 'support' %}
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M32 14H30C30 8.48 25.52 4 20 4C14.48 4 10 8.48 10 14H8C5.8 14 4 15.8 4 18V26C4 28.2 5.8 30 8 30H10V14C10 10.7 13.7 8 18 8H22C26.3 8 30 10.7 30 14V30H32C34.2 30 36 28.2 36 26V18C36 15.8 34.2 14 32 14ZM14 24C12.9 24 12 23.1 12 22V18C12 16.9 12.9 16 14 16C15.1 16 16 16.9 16 18V22C16 23.1 15.1 24 14 24ZM26 24C24.9 24 24 23.1 24 22V18C24 16.9 24.9 16 26 16C27.1 16 28 16.9 28 18V22C28 23.1 27.1 24 26 24Z" fill="currentColor"/>
+                    </svg>
+                  {% else %}
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="8" y="8" width="24" height="24" rx="2" stroke="currentColor" stroke-width="2"/>
+                      <circle cx="20" cy="20" r="6" fill="currentColor"/>
+                    </svg>
+                {% endcase %}
+              </div>
+              
+              <div class="icon-with-text__content">
+                <h3 class="icon-with-text__title">{{ block.settings.title }}</h3>
+                <div class="icon-with-text__text">{{ block.settings.text }}</div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #icon-with-text-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .icon-with-text__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .icon-with-text__heading {
+    text-align: center;
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    margin: 0 0 40px;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .icon-with-text__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .icon-with-text__item {
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    text-align: left;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+  }
+
+  .icon-with-text__icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    color: {{ section.settings.icon_color }};
+  }
+
+  .icon-with-text__title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: {{ section.settings.title_color }};
+  }
+
+  .icon-with-text__text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: {{ section.settings.text_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .icon-with-text__grid {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .icon-with-text__item {
+      max-width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Icon with Text",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Benefits"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 32,
+      "unit": "px",
+      "label": "Heading size"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#FFFFFF",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "default": "#000000",
+      "label": "Heading color"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "default": "#C73232",
+      "label": "Icon color"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "default": "#000000",
+      "label": "Title color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#333333",
+      "label": "Text color"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 40,
+      "unit": "px",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 40,
+      "unit": "px",
+      "label": "Padding bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon_item",
+      "name": "Icon Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "shipping",
+              "label": "Shipping" 
+            },
+            {
+              "value": "money",
+              "label": "Money-back"
+            },
+            {
+              "value": "lock",
+              "label": "Secure payment"
+            },
+            {
+              "value": "support",
+              "label": "Support"
+            },
+            {
+              "value": "custom",
+              "label": "Custom"
+            }
+          ],
+          "default": "shipping",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Free Shipping",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Order above $200",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon with Text",
+      "blocks": [
+        {
+          "type": "icon_item",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free Shipping",
+            "text": "Order above $200"
+          }
+        },
+        {
+          "type": "icon_item",
+          "settings": {
+            "icon": "money",
+            "title": "Money-back",
+            "text": "30 days guarantee"
+          }
+        },
+        {
+          "type": "icon_item",
+          "settings": {
+            "icon": "lock",
+            "title": "Secure Payments",
+            "text": "Secured by Stripe"
+          }
+        },
+        {
+          "type": "icon_item",
+          "settings": {
+            "icon": "support",
+            "title": "24/7 Support",
+            "text": "Phone and Email support"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

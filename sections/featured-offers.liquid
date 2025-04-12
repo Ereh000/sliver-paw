@@ -1,0 +1,390 @@
+<div class="featured-offers" id="featured-offers-{{ section.id }}">
+  <div class="featured-offers__background">
+    {% if section.settings.background_image != blank %}
+      <img
+        srcset="{% if section.settings.background_image.width >= 375 %}{{ section.settings.background_image | img_url: '375x' }} 375w,{% endif %}
+                {% if section.settings.background_image.width >= 750 %}{{ section.settings.background_image | img_url: '750x' }} 750w,{% endif %}
+                {% if section.settings.background_image.width >= 1100 %}{{ section.settings.background_image | img_url: '1100x' }} 1100w,{% endif %}
+                {% if section.settings.background_image.width >= 1500 %}{{ section.settings.background_image | img_url: '1500x' }} 1500w,{% endif %}
+                {% if section.settings.background_image.width >= 2200 %}{{ section.settings.background_image | img_url: '2200x' }} 2200w,{% endif %}
+                {{ section.settings.background_image | img_url: 'master' }} {{ section.settings.background_image.width }}w"
+        src="{{ section.settings.background_image | img_url: '1500x' }}"
+        sizes="100vw"
+        alt="{{ section.settings.background_image.alt | escape }}"
+        loading="lazy"
+        width="{{ section.settings.background_image.width }}"
+        height="{{ section.settings.background_image.height }}"
+        class="featured-offers__background-image"
+      >
+    {% endif %}
+    <div class="featured-offers__overlay"></div>
+  </div>
+
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="featured-offers__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="featured-offers__cards">
+      {% for block in section.blocks %}
+        <div class="featured-offers__card" {{ block.shopify_attributes }}>
+          <div class="featured-offers__card-content">
+            <h3 class="featured-offers__card-title">{{ block.settings.title }}</h3>
+            
+            <ul class="featured-offers__features">
+              {% for i in (1..5) %}
+                {% assign feature_key = 'feature_' | append: i %}
+                {% if block.settings[feature_key] != blank %}
+                  <li class="featured-offers__feature">
+                    <span class="featured-offers__feature-icon">
+                      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12L10 17L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    <span class="featured-offers__feature-text">{{ block.settings[feature_key] }}</span>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+            
+            {% if block.settings.button_label != blank %}
+              <div class="featured-offers__button-wrapper">
+                <a href="{{ block.settings.button_link }}" class="featured-offers__button">
+                  {{ block.settings.button_label }}
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  #featured-offers-{{ section.id }} {
+    position: relative;
+    padding: 80px 0;
+    color: {{ section.settings.text_color }};
+  }
+
+  .featured-offers__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: {{ section.settings.background_color }};
+  }
+
+  .featured-offers__background-image {
+    width: 100%;
+    height: 70%;
+    /* height: 100%; */
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .featured-offers__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: {{ section.settings.overlay_color }};
+    opacity: {{ section.settings.overlay_opacity }};
+  }
+
+  .featured-offers__heading {
+    text-align: center;
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    margin: 0 0 50px;
+    color: {{ section.settings.heading_color }};
+    text-transform: uppercase;
+  }
+
+  .featured-offers__cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .featured-offers__card {
+    flex: 1;
+    min-width: 280px;
+    max-width: 400px;
+    background-color: {{ section.settings.card_background }};
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-height: fit-content;
+  }
+
+  .featured-offers__card-content {
+    padding: 30px;
+  }
+
+  .featured-offers__card-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 20px;
+    color: {{ section.settings.card_title_color }};
+  }
+
+  .featured-offers__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px;
+  }
+
+  .featured-offers__feature {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+
+  .featured-offers__feature-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    color: {{ section.settings.accent_color }};
+  }
+
+  .featured-offers__feature-text {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .featured-offers__button-wrapper {
+    text-align: left;
+  }
+
+  .featured-offers__button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+  }
+
+  .featured-offers__button:hover {
+    background-color: {{ section.settings.button_background_hover }};
+  }
+
+  @media screen and (max-width: 749px) {
+    #featured-offers-{{ section.id }} {
+      padding: 60px 0;
+    }
+
+    .featured-offers__heading {
+      font-size: {{ section.settings.heading_size | times: 0.8 }}px;
+      margin-bottom: 30px;
+    }
+
+    .featured-offers__cards {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .featured-offers__card {
+      width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Featured Offers",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "PRICING & SPECIAL OFFERS",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 36,
+      "unit": "px",
+      "label": "Heading size"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "default": "#FFFFFF",
+      "label": "Heading color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#333333",
+      "label": "Text color"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "default": "#C73232",
+      "label": "Accent color (checkmarks)"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFC0C0"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "default": "#C78732",
+      "label": "Overlay color"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 0.9,
+      "step": 0.1,
+      "default": 0.7,
+      "label": "Overlay opacity"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "default": "#FFFFFF",
+      "label": "Card background color"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "default": "#000000",
+      "label": "Card title color"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "default": "#C73232",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_background_hover",
+      "default": "#A52828",
+      "label": "Button hover background"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "default": "#FFFFFF",
+      "label": "Button text color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "offer",
+      "name": "Offer",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "PRICING & SPECIAL OFFERS",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "feature_1",
+          "default": "Buy any individual product at full price.",
+          "label": "Feature 1"
+        },
+        {
+          "type": "text",
+          "id": "feature_2",
+          "default": "Option to add complementary products at a discount at checkout.",
+          "label": "Feature 2"
+        },
+        {
+          "type": "text",
+          "id": "feature_3",
+          "label": "Feature 3"
+        },
+        {
+          "type": "text",
+          "id": "feature_4",
+          "label": "Feature 4"
+        },
+        {
+          "type": "text",
+          "id": "feature_5",
+          "label": "Feature 5"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "SHOP NOW",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Offers",
+      "blocks": [
+        {
+          "type": "offer",
+          "settings": {
+            "title": "PRICING & SPECIAL OFFERS",
+            "feature_1": "Buy any individual product at full price.",
+            "feature_2": "Option to add complementary products at a discount at checkout.",
+            "button_label": "SHOP NOW"
+          }
+        },
+        {
+          "type": "offer",
+          "settings": {
+            "title": "Subscription Model",
+            "feature_1": "Save 10% on your order when you subscribe for monthly deliveries.",
+            "feature_2": "Mix & match different chews each month.",
+            "feature_3": "Flexibility to pause, skip, or cancel anytime.",
+            "button_label": "SHOP NOW"
+          }
+        },
+        {
+          "type": "offer",
+          "settings": {
+            "title": "Bundle & Save Option",
+            "feature_1": "Buy 2, Get 10% Off",
+            "feature_2": "Buy 3+, Get 15% Off",
+            "feature_3": "Subscription + Bundle = Max 15% Off",
+            "button_label": "SHOP NOW"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

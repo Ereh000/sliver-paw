@@ -3,6 +3,16 @@
     <header class="header-main" id="site-header">
       <div class="">
         <div class="header__content">
+          <!-- Mobile Menu Button -->
+          <button type="button" class="header__mobile-menu-button" aria-expanded="false" aria-controls="mobile-menu">
+            <span class="header__mobile-menu-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span class="visually-hidden">Menu</span>
+          </button>
+
           <!-- Logo -->
           <div class="header__logo-wrapper">
             <a href="{{ routes.root_url }}" class="header__logo-link">
@@ -71,6 +81,52 @@
         </div>
       </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="header__mobile-menu" id="mobile-menu" aria-hidden="true">
+      <div class="header__mobile-menu-container">
+        <div class="header__mobile-menu-header">
+          <button type="button" class="header__mobile-menu-close" aria-label="Close menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+        <nav class="header__mobile-nav">
+          <ul class="header__mobile-menu-list list-unstyled">
+            {%- for link in section.settings.menu.links -%}
+              <li class="header__mobile-menu-item">
+                <a
+                  href="{{ link.url }}"
+                  class="header__mobile-menu-link{% if link.active %} header__mobile-menu-link--active{% endif %}"
+                >
+                  {{ link.title }}
+                </a>
+                {%- if link.links != blank -%}
+                  <button class="header__mobile-submenu-toggle" aria-expanded="false">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 12L2 6L3.4 4.6L8 9.2L12.6 4.6L14 6L8 12Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                  <ul class="header__mobile-submenu list-unstyled">
+                    {%- for childlink in link.links -%}
+                      <li class="header__mobile-submenu-item">
+                        <a
+                          href="{{ childlink.url }}"
+                          class="header__mobile-submenu-link{% if childlink.active %} header__mobile-submenu-link--active{% endif %}"
+                        >
+                          {{ childlink.title }}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -82,7 +138,7 @@
     position: relative;
     z-index: 10;
     background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); */
   }
 
   .header-v2 .header-main {
@@ -208,14 +264,245 @@
     padding: 0;
   }
 
+  /* Mobile Menu Button */
+  .header-v2 .header__mobile-menu-button {
+    display: none;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+
+  }
+
+  .header-v2 .header__mobile-menu-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+  }
+
+  .header-v2 .header__mobile-menu-icon span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: #333333;
+    transition: transform 0.3s ease;
+  }
+
+  /* Mobile Menu Overlay */
+  .header-v2 .header__mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999 !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .header-v2 .header__mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+  }
+
+  .header-v2 .header__mobile-menu-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80%;
+    max-width: 350px;
+    height: 100%;
+    background-color: #ffffff;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .header-v2 .header__mobile-menu.active .header__mobile-menu-container {
+    transform: translateX(0);
+  }
+
+  .header-v2 .header__mobile-menu-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .header-v2 .header__mobile-menu-close {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    color: #333333;
+  }
+
+  .header-v2 .header__mobile-nav {
+    padding: 20px;
+  }
+
+  .header-v2 .header__mobile-menu-item {
+    margin-bottom: 15px;
+    position: relative;
+  }
+
+  .header-v2 .header__mobile-menu-link {
+    display: block;
+    padding: 10px 0;
+    color: #333333;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .header-v2 .header__mobile-menu-link--active {
+    color: #000000;
+    font-weight: 700;
+  }
+
+  .header-v2 .header__mobile-submenu-toggle {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .header-v2 .header__mobile-submenu-toggle.active {
+    transform: rotate(180deg);
+  }
+
+  .header-v2 .header__mobile-submenu {
+    display: none;
+    padding-left: 15px;
+    margin-top: 5px;
+  }
+
+  .header-v2 .header__mobile-submenu.active {
+    display: block;
+  }
+
+  .header-v2 .header__mobile-submenu-item {
+    margin-bottom: 10px;
+  }
+
+  .header-v2 .header__mobile-submenu-link {
+    display: block;
+    padding: 8px 0;
+    color: #333333;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .header-v2 .header__mobile-submenu-link--active {
+    color: #000000;
+    font-weight: 600;
+  }
+
   @media screen and (max-width: 990px) {
-    .header-v2 .header__menu {
+    .header-v2 .header__nav {
       display: none;
     }
 
-    /* Add mobile menu button here if needed */
+    .header-v2 .header__mobile-menu-button {
+      display: block;
+    }
+
+    .header-v2 .header__content {
+      justify-content: space-between;
+    }
+
+    .header-v2 .header__logo-wrapper {
+      flex-grow: 1;
+      text-align: center;
+    }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const mobileMenuButton = document.querySelector('.header__mobile-menu-button');
+    const mobileMenu = document.querySelector('.header__mobile-menu');
+    const mobileMenuClose = document.querySelector('.header__mobile-menu-close');
+    
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        this.setAttribute('aria-expanded', 'true');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+      });
+      
+      mobileMenuClose.addEventListener('click', function() {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      });
+      
+      // Close mobile menu when clicking outside
+      mobileMenu.addEventListener('click', function(event) {
+        if (event.target === this) {
+          mobileMenu.classList.remove('active');
+          document.body.style.overflow = '';
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
+    
+    // Mobile submenu toggles
+    const submenuToggles = document.querySelectorAll('.header__mobile-submenu-toggle');
+    
+    submenuToggles.forEach(function(toggle) {
+      toggle.addEventListener('click', function() {
+        const submenu = this.nextElementSibling;
+        this.classList.toggle('active');
+        submenu.classList.toggle('active');
+        
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+      });
+    });
+    
+    // Sticky header functionality
+    if ({{ section.settings.sticky_header | json }}) {
+      const header = document.querySelector('.header-container');
+      let lastScrollTop = 0;
+      
+      window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 100) {
+          header.classList.add('sticky');
+          
+          if (scrollTop > lastScrollTop) {
+            // Scrolling down
+            header.classList.add('hide');
+          } else {
+            // Scrolling up
+            header.classList.remove('hide');
+          }
+        } else {
+          header.classList.remove('sticky');
+          header.classList.remove('hide');
+        }
+        
+        lastScrollTop = scrollTop;
+      });
+    }
+  });
+</script>
 
 {% schema %}
 {

@@ -25,14 +25,6 @@
       </div>
 
       <div class="featured-product__details">
-        <h2 class="featured-product__title">
-          {% if section.settings.custom_title != blank %}
-            {{ section.settings.custom_title }}
-          {% else %}
-            {{ section.settings.product.title }}
-          {% endif %}
-        </h2>
-
         <div class="featured-product__variant-picker" data-product-id="{{ section.settings.product.id }}">
           <form
             method="post"
@@ -57,138 +49,166 @@
               id="quantity-input-{{ section.id }}"
             >
 
-            {% if section.settings.product.has_only_default_variant == false %}
-              <div class="featured-product__options">
-                {% for option in section.settings.product.options_with_values %}
-                  <div class="featured-product__option-selector" data-option-index="{{ forloop.index0 }}">
-                    <h3 class="featured-product__option-title">{{ option.name }}</h3>
-                    <div class="featured-product__option-values">
-                      {% for value in option.values %}
-                        <label class="featured-product__option-value {% if forloop.first %}selected{% endif %}">
-                          <input
-                            type="radio"
-                            name="option{{ forloop.parentloop.index }}"
-                            value="{{ value }}"
-                            {% if forloop.first %}
-                              checked
-                            {% endif %}
-                            data-index="option{{ forloop.parentloop.index }}"
-                            class="featured-product__option-input"
-                          >
-                          {% comment %} <span class="featured-product__option-indicator"></span> {% endcomment %}
-                          <span class="featured-product__option-label">{{ value }}</span>
-                        </label>
+            {%- for block in section.blocks -%}
+              {% case block.type %}
+                {% when 'title' %}
+                  <h2 class="featured-product__title" {{ block.shopify_attributes }}>
+                    {% if block.settings.custom_title != blank %}
+                      {{ block.settings.custom_title }}
+                    {% else %}
+                      {{ section.settings.product.title }}
+                    {% endif %}
+                  </h2>
+
+                {% when 'description' %}
+                  <div class="featured-product__description" {{ block.shopify_attributes }}>
+                    {{ block.settings.product_description }}
+                  </div>
+
+                {% when 'variant_selector' %}
+                  {% if section.settings.product.has_only_default_variant == false %}
+                    <div class="featured-product__options" {{ block.shopify_attributes }}>
+                      {% for option in section.settings.product.options_with_values %}
+                        <div class="featured-product__option-selector" data-option-index="{{ forloop.index0 }}">
+                          <h3 class="featured-product__option-title">{{ option.name }}</h3>
+                          <div class="featured-product__option-values">
+                            {% for value in option.values %}
+                              <label class="featured-product__option-value {% if forloop.first %}selected{% endif %}">
+                                <input
+                                  type="radio"
+                                  name="option{{ forloop.parentloop.index }}"
+                                  value="{{ value }}"
+                                  {% if forloop.first %}
+                                    checked
+                                  {% endif %}
+                                  data-index="option{{ forloop.parentloop.index }}"
+                                  class="featured-product__option-input"
+                                >
+                                <span class="featured-product__option-label">{{ value }}</span>
+                              </label>
+                            {% endfor %}
+                          </div>
+                        </div>
                       {% endfor %}
                     </div>
-                  </div>
-                {% endfor %}
-              </div>
-            {% endif %}
-
-            <!-- Remove the quantity selector section as we'll use pricing tiers for quantity -->
-
-            <div class="featured-product__description">
-              {{ section.settings.product_description }}
-            </div>
-
-            <div class="featured-product__pricing-tiers">
-              <div class="featured-product__pricing-tier" data-quantity="1">
-                <div class="featured-product__pricing-tier-header">
-                  <h3>BUY 1</h3>
-                  <p>Standard price</p>
-                </div>
-                <div class="featured-product__pricing-tier-price">
-                  <span class="money">{{ section.settings.product.price | money }}</span>
-                </div>
-              </div>
-
-              <div class="featured-product__pricing-tier" data-quantity="2">
-                <div class="featured-product__pricing-tier-header">
-                  <h3>BUY 2</h3>
-                  <p>Get 10% off</p>
-                </div>
-                <div class="featured-product__pricing-tier-price">
-                  <span class="money">{{ section.settings.product.price | money }}</span>
-                </div>
-              </div>
-
-              <div class="featured-product__pricing-tier" data-quantity="3">
-                <div class="featured-product__pricing-tier-header">
-                  <h3>BUY 3+</h3>
-                  <p>Get 15% off</p>
-                </div>
-                <div class="featured-product__pricing-tier-price">
-                  <span class="money">{{ section.settings.product.price | money }}</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="featured-product__purchase-options">
-              <label class="featured-product__purchase-option {% if section.settings.default_purchase_option == 'subscribe' %}selected{% endif %}">
-                <input
-                  type="radio"
-                  name="purchase_option"
-                  value="subscribe"
-                  {% if section.settings.default_purchase_option == 'subscribe' %}
-                    checked
                   {% endif %}
-                  class="featured-product__purchase-input"
-                >
-                <span class="featured-product__purchase-indicator"></span>
-                <div class="featured-product__purchase-details">
-                  <span class="featured-product__purchase-label">SUBSCRIBE & SAVE 10%</span>
-                  <div class="featured-product__purchase-price">
-                    <s>{{ section.settings.product.price | money }}</s>
-                    <span class="money">{{ section.settings.product.price | times: 0.9 | money }}</span>
-                  </div>
-                </div>
-              </label>
 
-              <label class="featured-product__purchase-option {% if section.settings.default_purchase_option == 'onetime' %}selected{% endif %}">
-                <input
-                  type="radio"
-                  name="purchase_option"
-                  value="onetime"
-                  {% if section.settings.default_purchase_option == 'onetime' %}
-                    checked
-                  {% endif %}
-                  class="featured-product__purchase-input"
-                >
-                <span class="featured-product__purchase-indicator"></span>
-                <div class="featured-product__purchase-details">
-                  <span class="featured-product__purchase-label">TRY-ONCE</span>
-                  <div class="featured-product__purchase-price">
-                    <span class="money">{{ section.settings.product.price | money }}</span>
+                {% when 'quantity_selector' %}
+                  <div class="featured-product__pricing-tiers" {{ block.shopify_attributes }}>
+                    {% assign quantities = block.settings.quantity_options | split: ',' %}
+                    {% for quantity in quantities %}
+                      {% assign qty = quantity | strip | plus: 0 %}
+                      {% assign discount = 0 %}
+                      {% assign discount_text = 'Standard price' %}
+                      
+                      {% if qty >= 3 %}
+                        {% assign discount = 15 %}
+                        {% assign discount_text = 'Get 15% off' %}
+                      {% elsif qty >= 2 %}
+                        {% assign discount = 10 %}
+                        {% assign discount_text = 'Get 10% off' %}
+                      {% endif %}
+                      
+                      <div class="featured-product__pricing-tier" data-quantity="{{ qty }}">
+                        <div class="featured-product__pricing-tier-header">
+                          <h3>BUY {{ qty }}</h3>
+                          <p>{{ discount_text }}</p>
+                        </div>
+                        <div class="featured-product__pricing-tier-price">
+                          <span class="money">{{ section.settings.product.price | money }}</span>
+                        </div>
+                      </div>
+                    {% endfor %}
                   </div>
-                </div>
-              </label>
-            </div>
 
-            <div class="featured-product__submit">
-              <button
-                type="submit"
-                name="add"
-                class="featured-product__add-to-cart-button"
-                {% unless section.settings.product.available %}
-                  disabled
-                {% endunless %}
-              >
-                <span class="featured-product__add-to-cart-icon">{% render 'icon-cart' %}</span>
-                <span class="featured-product__add-to-cart-text">
-                  {% if section.settings.product.available %}
-                    {{ 'products.product.add_to_cart' | t }}
-                  {% else %}
-                    {{ 'products.product.sold_out' | t }}
-                  {% endif %}
-                </span>
-              </button>
-            </div>
+                {% when 'purchase_options' %}
+                  <div class="featured-product__purchase-options" {{ block.shopify_attributes }}>
+                    <label class="featured-product__purchase-option {% if block.settings.default_purchase_option == 'subscribe' %}selected{% endif %}">
+                      <input
+                        type="radio"
+                        name="purchase_option"
+                        value="subscribe"
+                        {% if block.settings.default_purchase_option == 'subscribe' %}
+                          checked
+                        {% endif %}
+                        class="featured-product__purchase-input"
+                      >
+                      <span class="featured-product__purchase-indicator"></span>
+                      <div class="featured-product__purchase-details">
+                        <span class="featured-product__purchase-label">{{ block.settings.subscription_label }}</span>
+                        <div class="featured-product__purchase-price">
+                          <s>{{ section.settings.product.price | money }}</s>
+                          <span class="money">{{ section.settings.product.price | times: 0.9 | money }}</span>
+                        </div>
+                      </div>
+                    </label>
+
+                    <label class="featured-product__purchase-option {% if block.settings.default_purchase_option == 'onetime' %}selected{% endif %}">
+                      <input
+                        type="radio"
+                        name="purchase_option"
+                        value="onetime"
+                        {% if block.settings.default_purchase_option == 'onetime' %}
+                          checked
+                        {% endif %}
+                        class="featured-product__purchase-input"
+                      >
+                      <span class="featured-product__purchase-indicator"></span>
+                      <div class="featured-product__purchase-details">
+                        <span class="featured-product__purchase-label">{{ block.settings.onetime_label }}</span>
+                        <div class="featured-product__purchase-price">
+                          <span class="money">{{ section.settings.product.price | money }}</span>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+
+                {% when '@app' %}
+                  {% render block %}
+
+                {% when 'add_to_cart' %}
+                  <div class="featured-product__submit" {{ block.shopify_attributes }}>
+                    <button
+                      type="submit"
+                      name="add"
+                      class="featured-product__add-to-cart-button"
+                      {% unless section.settings.product.available %}
+                        disabled
+                      {% endunless %}
+                    >
+                      <span class="featured-product__add-to-cart-icon">{% render 'icon-cart' %}</span>
+                      <span class="featured-product__add-to-cart-text">
+                        {% if section.settings.product.available %}
+                          {{ block.settings.button_text | default: 'Add to cart' }}
+                        {% else %}
+                          {{ 'products.product.sold_out' | t }}
+                        {% endif %}
+                      </span>
+                    </button>
+                  </div>
+              {% endcase %}
+            {%- endfor -%}
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  .featured-product__options{
+    margin-bottom: 3rem;
+  }
+  .featured-product__option-selector{
+    margin-bottom: 2rem;
+  }
+  .featured-product__option-selector{
+    margin-bottom: 2rem;
+  }
+  .featured-product__option-title{
+    margin-bottom: 1rem;
+  }
+</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -363,10 +383,11 @@
         let price = variantPrice;
         
         // Apply discounts for tiers
-        if (index === 1) { // Buy 2 (10% off)
-          price = price * 0.9;
-        } else if (index === 2) { // Buy 3+ (15% off)
+        const quantity = parseInt(tier.getAttribute('data-quantity'));
+        if (quantity >= 3) { // Buy 3+ (15% off)
           price = price * 0.85;
+        } else if (quantity >= 2) { // Buy 2 (10% off)
+          price = price * 0.9;
         }
         
         priceElement.textContent = formatMoney(price);
@@ -511,56 +532,145 @@
       "label": "Product"
     },
     {
-      "type": "text",
-      "id": "custom_title",
-      "label": "Custom title",
-      "info": "Leave blank to use product title"
-    },
-    {
-      "type": "richtext",
-      "id": "product_description",
-      "label": "Product description",
-      "default": "<p>Premium 5-8 inch bully sticks in a 12-pack — long-lasting, healthy chews your dog will love. Limited-time offer!</p>"
-    },
-    {
       "type": "checkbox",
       "id": "show_accent_element",
       "label": "Show accent element",
       "default": true
     },
     {
-      "type": "select",
-      "id": "default_purchase_option",
-      "label": "Default purchase option",
-      "options": [
-        {
-          "value": "subscribe",
-          "label": "Subscribe & Save"
-        },
-        {
-          "value": "onetime",
-          "label": "Try Once"
-        }
-      ],
-      "default": "subscribe"
-    },
-    {
       "type": "text",
       "id": "subscription_selling_plan_id",
       "label": "Subscription selling plan ID",
       "info": "Enter the selling plan ID for subscription purchases"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom title",
+          "info": "Leave blank to use product title"
+        }
+      ]
     },
     {
-      "type": "text",
-      "id": "quantity_options",
-      "label": "Quantity options (comma-separated)",
-      "default": "3,6,9,12",
-      "info": "Enter quantity options separated by commas"
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "product_description",
+          "label": "Product description",
+          "default": "<p>Premium 5-8 inch bully sticks in a 12-pack — long-lasting, healthy chews your dog will love. Limited-time offer!</p>"
+        }
+      ]
+    },
+    {
+      "type": "variant_selector",
+      "name": "Variant Selector",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Variant options will be displayed automatically based on the selected product."
+        }
+      ]
+    },
+    {
+      "type": "quantity_selector",
+      "name": "Quantity Selector",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "quantity_options",
+          "label": "Quantity options (comma-separated)",
+          "default": "1,2,3",
+          "info": "Enter quantity options separated by commas"
+        }
+      ]
+    },
+    {
+      "type": "purchase_options",
+      "name": "Purchase Options",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "default_purchase_option",
+          "label": "Default purchase option",
+          "options": [
+            {
+              "value": "subscribe",
+              "label": "Subscribe & Save"
+            },
+            {
+              "value": "onetime",
+              "label": "Try Once"
+            }
+          ],
+          "default": "subscribe"
+        },
+        {
+          "type": "text",
+          "id": "subscription_label",
+          "label": "Subscription label",
+          "default": "SUBSCRIBE & SAVE 10%"
+        },
+        {
+          "type": "text",
+          "id": "onetime_label",
+          "label": "One-time purchase label",
+          "default": "TRY-ONCE"
+        }
+      ]
+    },
+    {
+      "type": "add_to_cart",
+      "name": "Add to Cart Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Add to cart"
+        }
+      ]
+    },
+    {
+      "type": "@app"
     }
   ],
   "presets": [
     {
-      "name": "Featured Product v2"
+      "name": "Featured Product v2",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "variant_selector"
+        },
+        {
+          "type": "quantity_selector"
+        },
+        {
+          "type": "purchase_options"
+        },
+        {
+          "type": "add_to_cart"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,410 @@
+<div class="faqs-section" id="faqs-section-{{ section.id }}">
+  <div class="page-width">
+    <div class="faqs-section__container">
+      {% if section.settings.heading != blank %}
+        <h2 class="faqs-section__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      <div class="faqs-section__content">
+        {% if section.settings.image != blank %}
+          <div class="faqs-section__image-container">
+            <img
+              srcset="
+                {% if section.settings.image.width >= 375 %}{{ section.settings.image | img_url: '375x' }} 375w,{% endif %}
+                {% if section.settings.image.width >= 550 %}{{ section.settings.image | img_url: '550x' }} 550w,{% endif %}
+                {% if section.settings.image.width >= 750 %}{{ section.settings.image | img_url: '750x' }} 750w,{% endif %}
+                {{ section.settings.image | img_url: 'master' }} {{ section.settings.image.width }}w
+              "
+              src="{{ section.settings.image | img_url: '550x' }}"
+              sizes="(min-width: 990px) 50vw, 100vw"
+              alt="{{ section.settings.image.alt | escape }}"
+              loading="lazy"
+              width="{{ section.settings.image.width }}"
+              height="{{ section.settings.image.height }}"
+              class="faqs-section__image"
+            >
+          </div>
+        {% endif %}
+
+        <div class="faqs-section__questions">
+          <div class="faqs-section__accordion">
+            {% for block in section.blocks %}
+              {% if block.type == 'question' %}
+                <div class="faqs-section__accordion-item" {{ block.shopify_attributes }}>
+                  <button class="faqs-section__accordion-button" aria-expanded="false">
+                    <span class="faqs-section__accordion-title">{{ block.settings.question }}</span>
+                    <span class="faqs-section__accordion-icon">
+                      <svg
+                        class="icon-chevron-down"
+                        width="14"
+                        height="8"
+                        viewBox="0 0 14 8"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                  </button>
+                  <div class="faqs-section__accordion-content" hidden>
+                    <div class="faqs-section__accordion-content-inner">
+                      {{ block.settings.answer }}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #faqs-section-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .faqs-section__container {
+    /* max-width: 1200px; */
+    margin: 0 auto;
+  }
+
+  .faqs-section__heading {
+    text-align: center;
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    margin: 0 0 40px;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .faqs-section__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+  .faqs-section__image-container {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .faqs-section__image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .faqs-section__questions {
+    flex: 1.4;
+    min-width: 300px;
+  }
+
+  .faqs-section__accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .faqs-section__accordion-item {
+    border: 1px solid {{ section.settings.border_color }};
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .faqs-section__accordion-button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: {{ section.settings.question_background }};
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .faqs-section__accordion-button:hover {
+    background-color: {{ section.settings.question_background_hover }};
+  }
+
+  .faqs-section__accordion-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ section.settings.question_color }};
+  }
+
+  .faqs-section__accordion-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    color: {{ section.settings.icon_color }};
+  }
+
+  .faqs-section__accordion-button[aria-expanded="true"] .faqs-section__accordion-icon {
+    transform: rotate(180deg);
+  }
+
+  .faqs-section__accordion-content {
+    background-color: {{ section.settings.answer_background }};
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .faqs-section__accordion-content-inner {
+    padding: 20px;
+    color: {{ section.settings.answer_color }};
+    font-size: 15px;  
+    line-height: 1.6;
+    border-top: 1px solid {{ section.settings.border_color }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .faqs-section__content {
+      flex-direction: column;
+    }
+
+    .faqs-section__image-container {
+      width: 100%;
+    }
+
+    .faqs-section__questions {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .faqs-section__heading {
+      font-size: {{ section.settings.heading_size | times: 0.8 }}px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const accordionItems = document.querySelectorAll('#faqs-section-{{ section.id }} .faqs-section__accordion-item');
+
+    accordionItems.forEach(item => {
+      const button = item.querySelector('.faqs-section__accordion-button');
+      const content = item.querySelector('.faqs-section__accordion-content');
+
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+
+        // Close all other items
+        if (!expanded && {{ section.settings.allow_multiple_open | json }} === false) {
+          accordionItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              const otherButton = otherItem.querySelector('.faqs-section__accordion-button');
+              const otherContent = otherItem.querySelector('.faqs-section__accordion-content');
+
+              otherButton.setAttribute('aria-expanded', 'false');
+              otherContent.setAttribute('hidden', '');
+            }
+          });
+        }
+
+        // Toggle current item
+        button.setAttribute('aria-expanded', !expanded);
+
+        if (expanded) {
+          content.setAttribute('hidden', '');
+        } else {
+          content.removeAttribute('hidden');
+        }
+      });
+
+      // Open first item by default if specified
+      if ({{ section.settings.open_first_item | json }} && item === accordionItems[0]) {
+        button.setAttribute('aria-expanded', 'true');
+        content.removeAttribute('hidden');
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQs",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Frequently Asked Questions!",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 32,
+      "unit": "px",
+      "label": "Heading size"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_multiple_open",
+      "default": false,
+      "label": "Allow multiple questions open at once"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first_item",
+      "default": true,
+      "label": "Open first question by default"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#FFFFFF",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "default": "#000000",
+      "label": "Heading color"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "default": "#E5E5E5",
+      "label": "Border color"
+    },
+    {
+      "type": "color",
+      "id": "question_background",
+      "default": "#FFFFFF",
+      "label": "Question background"
+    },
+    {
+      "type": "color",
+      "id": "question_background_hover",
+      "default": "#F9F9F9",
+      "label": "Question background hover"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "default": "#000000",
+      "label": "Question text color"
+    },
+    {
+      "type": "color",
+      "id": "answer_background",
+      "default": "#FFFFFF",
+      "label": "Answer background"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "default": "#333333",
+      "label": "Answer text color"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "default": "#000000",
+      "label": "Icon color"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px",
+      "label": "Padding bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "default": "What makes Bonez Bully Sticks different from other brands?",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "default": "<p>Our bully sticks are made from 100% real beef, slow-roasted for maximum flavor, and free from fillers, rawhide, or artificial preservatives. They meet the highest USDA and FDA safety standards and are sourced in the USA.</p>",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQs",
+      "blocks": [
+        {
+          "type": "question",
+          "settings": {
+            "question": "What makes Bonez Bully Sticks different from other brands?",
+            "answer": "<p>Our bully sticks are made from 100% real beef, slow-roasted for maximum flavor, and free from fillers, rawhide, or artificial preservatives. They meet the highest USDA and FDA safety standards and are sourced in the USA.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Are these chews safe for puppies?",
+            "answer": "<p>Yes, our bully sticks are safe for puppies who have started teething (typically around 3-4 months old). They're fully digestible and help with dental health. For very young puppies, we recommend supervision during chewing.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How long do Bonez Bully Sticks last?",
+            "answer": "<p>The longevity depends on your dog's chewing style and size. For aggressive chewers, our standard sticks typically last 30-60 minutes. For moderate chewers, they can provide hours of entertainment. Our jumbo and extra-thick options last even longer.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How does the subscription model work?",
+            "answer": "<p>Our subscription service delivers fresh bully sticks to your door on your schedule (monthly, bi-monthly, etc.). You save 10% on every order, can customize your box contents, and can pause, skip, or cancel anytime with no fees or commitments.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

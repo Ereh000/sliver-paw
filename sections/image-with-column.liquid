@@ -1,0 +1,439 @@
+<div class="image-with-column" id="image-with-column-{{ section.id }}">
+  <div class="page-width">
+    <div class="image-with-column__container">
+      {% if section.settings.heading != blank %}
+        <div class="image-with-column__header">
+          <div class="header-wrapper">
+            <h2 class="image-with-column__heading">{{ section.settings.heading }}</h2>
+            {% if section.settings.subheading != blank %}
+              <div class="image-with-column__subheading">{{ section.settings.subheading }}</div>
+            {% endif %}
+          </div>
+          {% if section.settings.button_label != blank %}
+            <div class="image-with-column__button-wrapper">
+              <a href="{{ section.settings.button_link }}" class="image-with-column__button">
+                {{ section.settings.button_label }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="image-with-column__content">
+        <div class="image-with-column__left-column">
+          {% for block in section.blocks %}
+            {% if block.type == 'feature' and block.settings.position == 'left' %}
+              <div class="image-with-column__feature" {{ block.shopify_attributes }}>
+                <div class="image-with-column__feature-number">{{ block.settings.number }}</div>
+                <div class="image-with-column__feature-content">
+                  <h3 class="image-with-column__feature-title">{{ block.settings.title }}</h3>
+                  <div class="image-with-column__feature-text">{{ block.settings.text }}</div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="image-with-column__image-column">
+          {% if section.settings.image != blank %}
+            <img
+              srcset="
+                {% if section.settings.image.width >= 375 %}{{ section.settings.image | img_url: '375x' }} 375w,{% endif %}
+                {% if section.settings.image.width >= 550 %}{{ section.settings.image | img_url: '550x' }} 550w,{% endif %}
+                {% if section.settings.image.width >= 750 %}{{ section.settings.image | img_url: '750x' }} 750w,{% endif %}
+                {{ section.settings.image | img_url: 'master' }} {{ section.settings.image.width }}w
+              "
+              src="{{ section.settings.image | img_url: '550x' }}"
+              sizes="(min-width: 750px) 33vw, 100vw"
+              alt="{{ section.settings.image.alt | escape }}"
+              loading="lazy"
+              width="{{ section.settings.image.width }}"
+              height="{{ section.settings.image.height }}"
+              class="image-with-column__image"
+            >
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </div>
+
+        <div class="image-with-column__right-column">
+          {% for block in section.blocks %}
+            {% if block.type == 'feature' and block.settings.position == 'right' %}
+              <div class="image-with-column__feature" {{ block.shopify_attributes }}>
+                <div class="image-with-column__feature-number">{{ block.settings.number }}</div>
+                <div class="image-with-column__feature-content">
+                  <h3 class="image-with-column__feature-title">{{ block.settings.title }}</h3>
+                  <div class="image-with-column__feature-text">{{ block.settings.text }}</div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      {% comment %} {% if section.settings.button_label != blank %}
+        <div class="image-with-column__button-wrapper">
+          <a href="{{ section.settings.button_link }}" class="image-with-column__button">
+            {{ section.settings.button_label }}
+          </a>
+        </div>
+      {% endif %} {% endcomment %}
+    </div>
+  </div>
+</div>
+
+<style>
+  #image-with-column-{{ section.id }} {
+    padding: 60px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .image-with-column__container {
+    /* max-width: 1200px; */
+    margin: 0 auto;
+  }  
+
+  .image-with-column__header {
+    text-align: center;
+    margin-bottom: 50px;
+    display: flex;
+    gap: 3rem;
+    text-align: left;
+  }
+  .header-wrapper{
+    flex: 1;
+    min-width: 300px;
+    background: none;
+  }
+  .image-with-column__button-wrapper{
+    margin: 0;
+    flex: 1;
+    min-width: 300px;
+    text-align: end;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin: 0 !important;
+  }
+
+  .image-with-column__heading {
+    font-size: {{ section.settings.heading_size }}px;
+    line-height: 1.2;
+    margin: 0 0 15px;
+    color: {{ section.settings.heading_color }};
+    font-weight: 700;
+  }
+
+  .image-with-column__subheading {
+    font-size: {{ section.settings.subheading_size }}px;
+    line-height: 1.5;
+    color: {{ section.settings.text_color }};
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .image-with-column__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .image-with-column__left-column,
+  .image-with-column__right-column {
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .image-with-column__image-column {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .image-with-column__image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .image-with-column__feature {
+    display: flex;
+    margin-bottom: 30px;
+    flex-direction: column;
+  }
+
+  .image-with-column__feature-number {
+    font-size: 60px;
+    font-weight: 700;
+    color: {{ section.settings.number_color }};
+    opacity: 0.3;
+    line-height: 1;
+    margin-right: 15px;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+  }
+
+  .image-with-column__feature-content {
+    flex: 1;
+  }
+
+  .image-with-column__feature-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .image-with-column__feature-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: {{ section.settings.text_color }};
+  }
+
+  .image-with-column__button-wrapper {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .image-with-column__button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  .image-with-column__button:hover {
+    background-color: {{ section.settings.button_background_hover }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .image-with-column__content {
+      flex-direction: column;
+    }
+
+    .image-with-column__left-column,
+    .image-with-column__right-column,
+    .image-with-column__image-column {
+      width: 100%;
+    }
+
+    .image-with-column__image-column {
+      order: -1;
+      margin-bottom: 30px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .image-with-column__heading {
+      font-size: {{ section.settings.heading_size | times: 0.8 }}px;
+    }
+
+    .image-with-column__subheading {
+      font-size: {{ section.settings.subheading_size | times: 0.9 }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Image with Columns",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#FFF0F0",
+      "label": "Background color"
+    },
+    {
+      "type": "header",
+      "content": "Text content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "HOW BONEZ BULLY STICKS SUPPORT YOUR DOG'S HEALTH",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 36,
+      "unit": "px",
+      "label": "Heading size"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "default": "#000000",
+      "label": "Heading color"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "default": 18,
+      "unit": "px",
+      "label": "Subheading size"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#333333",
+      "label": "Text color"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "default": "#C73232",
+      "label": "Number color"
+    },
+    {
+      "type": "header",
+      "content": "Image settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Center image"
+    },
+    {
+      "type": "header",
+      "content": "Button settings"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "SHOP NOW",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "default": "#C73232",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_background_hover",
+      "default": "#A52828",
+      "label": "Button hover background"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "default": "#FFFFFF",
+      "label": "Button text color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "position",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left column"
+            },
+            {
+              "value": "right",
+              "label": "Right column"
+            }
+          ],
+          "default": "left",
+          "label": "Position"
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "default": "01",
+          "label": "Number"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Promotes Oral Hygiene",
+          "label": "Feature title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "default": "The natural chewing action on our bully sticks helps remove plaque and tartar, reducing the risk of dental disease and improving breath.",
+          "label": "Feature text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with Columns",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "number": "01",
+            "title": "Promotes Oral Hygiene",
+            "text": "The natural chewing action on our bully sticks helps remove plaque and tartar, reducing the risk of dental disease and improving breath."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "number": "03",
+            "title": "High in Protein, Low in Fat",
+            "text": "Our bully sticks are made only from real beef, meaning they are naturally high in protein and packed with essential nutrients"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "number": "02",
+            "title": "100% Digestible and Stomach-Friendly",
+            "text": "Unlike rawhide, which can swell in a dog's stomach and lead to blockages, our bully sticks break down naturally and are easy"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "number": "04",
+            "title": "No Artificial Additives or Preservatives",
+            "text": "Many store-bought dog treats are loaded with artificial ingredients that can lead to allergies, digestive issues, and long-term health"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

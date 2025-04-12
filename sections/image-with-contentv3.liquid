@@ -1,0 +1,410 @@
+<div class="image-with-contentv3" id="image-with-contentv3-{{ section.id }}">
+  <div class="page-width">
+    <div class="image-with-contentv3__container">
+      <div class="image-with-contentv3__header">
+        {% if section.settings.heading != blank %}
+          <h2 class="image-with-contentv3__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="image-with-contentv3__description">{{ section.settings.description }}</div>
+        {% endif %}
+      </div>
+
+      <div class="image-with-contentv3__content">
+        <div class="image-with-contentv3__image-column">
+          {% assign first_feature = section.blocks | first %}
+
+          <div class="image-with-contentv3__image-wrapper">
+            {% for block in section.blocks %}
+              {% if block.type == 'feature' %}
+                <div
+                  class="image-with-contentv3__image-container {% if forloop.first %}active{% endif %}"
+                  data-feature-id="{{ block.id }}"
+                >
+                  {% if block.settings.image != blank %}
+                    <img
+                      srcset="
+                        {% if block.settings.image.width >= 375 %}{{ block.settings.image | img_url: '375x' }} 375w,{% endif %}
+                        {% if block.settings.image.width >= 550 %}{{ block.settings.image | img_url: '550x' }} 550w,{% endif %}
+                        {% if block.settings.image.width >= 750 %}{{ block.settings.image | img_url: '750x' }} 750w,{% endif %}
+                        {% if block.settings.image.width >= 1100 %}{{ block.settings.image | img_url: '1100x' }} 1100w,{% endif %}
+                        {{ block.settings.image | img_url: 'master' }} {{ block.settings.image.width }}w
+                      "
+                      src="{{ block.settings.image | img_url: '550x' }}"
+                      sizes="(min-width: 750px) 50vw, 100vw"
+                      alt="{{ block.settings.image.alt | escape }}"
+                      loading="lazy"
+                      width="{{ block.settings.image.width }}"
+                      height="{{ block.settings.image.height }}"
+                      class="image-with-contentv3__image"
+                    >
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="image-with-contentv3__text-column">
+          <div class="image-with-contentv3__features">
+            {% for block in section.blocks %}
+              {% if block.type == 'feature' %}
+                <div
+                  class="image-with-contentv3__feature {% if forloop.first %}active{% endif %}"
+                  data-feature-id="{{ block.id }}"
+                  {{ block.shopify_attributes }}
+                >
+                  <div class="image-with-contentv3__feature-icon">
+                    {% comment %}
+                      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.8511 5.3219L13.4571 14.1859L8.59705 10.1859C8.22005 9.8699 7.64105 9.9179 7.32505 10.2949C7.01005 10.6719 7.05705 11.2509 7.43405 11.5669L12.9341 16.1149C13.1221 16.2729 13.3591 16.3519 13.5971 16.3519C13.8641 16.3519 14.1301 16.2539 14.3231 16.0649L22.3231 6.6649C22.6581 6.3099 22.6341 5.7299 22.2791 5.3949C21.9241 5.0599 21.3441 5.0839 21.0091 5.4389L20.8511 5.3219Z" fill="currentColor"/>
+                        <path d="M12 2C6.486 2 2 6.486 2 12C2 17.514 6.486 22 12 22C17.514 22 22 17.514 22 12C22 10.744 21.795 9.542 21.422 8.422C21.316 8.138 21.014 7.981 20.73 8.087C20.446 8.193 20.289 8.495 20.395 8.779C20.725 9.764 20.9 10.856 20.9 12C20.9 16.906 16.906 20.9 12 20.9C7.094 20.9 3.1 16.906 3.1 12C3.1 7.094 7.094 3.1 12 3.1C13.144 3.1 14.236 3.275 15.221 3.605C15.505 3.711 15.807 3.554 15.913 3.27C16.019 2.986 15.862 2.684 15.578 2.578C14.458 2.205 13.256 2 12 2Z" fill="currentColor"/>
+                      </svg>
+                    {% endcomment %}
+                    {% render 'icon-bone' %}
+                  </div>
+                  <div class="image-with-contentv3__feature-content">
+                    <h3 class="image-with-contentv3__feature-title">{{ block.settings.title }}</h3>
+                    {% if block.settings.text != blank %}
+                      <div class="image-with-contentv3__feature-text">{{ block.settings.text }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #image-with-contentv3-{{ section.id }} {
+    padding: 60px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .image-with-contentv3__container {
+    /* max-width: 1200px; */
+    margin: 0 auto;
+  }
+
+  .image-with-contentv3__header {
+    text-align: left;
+    margin-bottom: 40px;
+    /* max-width: 800px; */
+    width: 100%;
+    max-width: none;
+    display: flex;
+    gap: 40px;
+  }
+
+  .image-with-contentv3__heading {
+    font-size: {{ section.settings.heading_size }}px;
+    line-height: 1.2;
+    margin: 0 0 20px;
+    color: {{ section.settings.heading_color }};
+    font-weight: 700;
+    flex: 1;
+  min-width: 300px;
+  }
+
+  .image-with-contentv3__description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: {{ section.settings.text_color }};
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .image-with-contentv3__description p {   
+    margin: 0 !important;
+  }
+
+  .image-with-contentv3__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .image-with-contentv3__image-column {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .image-with-contentv3__text-column {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .image-with-contentv3__image-wrapper {
+    position: relative;
+    width: 100%;
+    background-color: {{ section.settings.image_background_color }};
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+
+  .image-with-contentv3__image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-with-contentv3__image-container.active {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .image-with-contentv3__image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    padding: 20px;
+  }
+
+  .image-with-contentv3__features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .image-with-contentv3__feature {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    border-bottom: 1px solid {{ section.settings.divider_color }};
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .image-with-contentv3__feature:hover {
+    background-color: rgba({{ section.settings.accent_color.red }}, {{ section.settings.accent_color.green }}, {{ section.settings.accent_color.blue }}, 0.05);
+  }
+
+  .image-with-contentv3__feature.active {
+    border-left: 3px solid {{ section.settings.accent_color }};
+    background-color: rgba({{ section.settings.accent_color.red }}, {{ section.settings.accent_color.green }}, {{ section.settings.accent_color.blue }}, 0.1);
+  }
+
+  .image-with-contentv3__feature.active .image-with-contentv3__feature-title {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .image-with-contentv3__feature-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid {{ section.settings.accent_color }};
+    color: {{ section.settings.accent_color }};
+  }
+
+  .image-with-contentv3__feature.active .image-with-contentv3__feature-icon {
+    /* background-color: {{ section.settings.accent_color }}; */
+    color: white;
+  }
+
+  .image-with-contentv3__feature-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 5px;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .image-with-contentv3__feature-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: {{ section.settings.text_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .image-with-contentv3__content {
+      flex-direction: column-reverse;
+    }
+
+    .image-with-contentv3__heading {
+      font-size: {{ section.settings.heading_size | times: 0.8 }}px;
+    }
+
+    .image-with-contentv3__image-wrapper {
+      aspect-ratio: 4/3;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.getElementById('image-with-contentv3-{{ section.id }}');
+    if (!section) return;
+
+    const features = section.querySelectorAll('.image-with-contentv3__feature');
+    const imageContainers = section.querySelectorAll('.image-with-contentv3__image-container');
+
+    features.forEach((feature) => {
+      feature.addEventListener('click', function () {
+        const featureId = this.getAttribute('data-feature-id');
+
+        // Update active feature
+        features.forEach((f) => f.classList.remove('active'));
+        this.classList.add('active');
+
+        // Update active image
+        imageContainers.forEach((container) => {
+          container.classList.remove('active');
+          if (container.getAttribute('data-feature-id') === featureId) {
+            container.classList.add('active');
+          }
+        });
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Image with Features v3",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Text content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "WHAT MAKES BONEZ BULLY STICKS BETTER?",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 36,
+      "unit": "px",
+      "label": "Heading size"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "default": "#000000",
+      "label": "Heading color"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "default": "<p>Not all dog chews are created equal. Unlike mass produced, low-quality alternatives, Bonez Bully Sticks provide maximum nutrition, safety, and enjoyment for your furry companion.</p>",
+      "label": "Description"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#333333",
+      "label": "Text color"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "default": "#C73232",
+      "label": "Accent color"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "default": "#EEEEEE",
+      "label": "Divider color"
+    },
+    {
+      "type": "color",
+      "id": "image_background_color",
+      "default": "#F9F9F9",
+      "label": "Image background color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "No Rawhide, No Fillers, Just Real Beef",
+          "label": "Feature title"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "default": "100% natural beef with no artificial ingredients or preservatives.",
+          "label": "Feature text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Feature image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with Features v3",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "No Rawhide, No Fillers, Just Real Beef",
+            "text": "100% natural beef with no artificial ingredients or preservatives."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Supports Joint & Dental Health",
+            "text": "Promotes healthy teeth and gums while providing essential nutrients."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Long-Lasting Chews For Dogs Of All Sizes",
+            "text": "Durable treats that keep dogs engaged and satisfied for hours."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Meets The Highest Safety & Quality Standards",
+            "text": "Rigorously tested and produced in facilities that exceed industry requirements."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

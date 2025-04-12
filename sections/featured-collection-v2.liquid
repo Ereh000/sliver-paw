@@ -1,0 +1,386 @@
+<div class="featured-collection-v2" id="featured-collection-v2-{{ section.id }}">
+  <div class="page-width">
+    <div class="featured-collection-v2__header">
+      {% if section.settings.title != blank %}
+        <h2 class="featured-collection-v2__title">{{ section.settings.title }}</h2>
+      {% endif %}
+      
+      {% if section.settings.description != blank %}
+        <div class="featured-collection-v2__description">{{ section.settings.description }}</div>
+      {% endif %}
+    </div>
+
+    <div class="featured-collection-v2__grid">
+      {%- assign collection = collections[section.settings.collection] -%}
+      {%- assign products_to_display = section.settings.products_to_show | at_most: collection.products_count -%}
+
+      {%- if collection != blank and collection.products_count > 0 -%}
+        {%- for product in collection.products limit: products_to_display -%}
+          <div class="featured-collection-v2__product">
+            <div class="featured-collection-v2__product-card">
+              <a href="{{ product.url }}" class="featured-collection-v2__product-link">
+                <div class="featured-collection-v2__product-image-wrapper">
+                  {% if product.featured_media != blank %}
+                    <img
+                      srcset="{% if product.featured_media.preview_image.width >= 165 %}{{ product.featured_media.preview_image | img_url: '165x' }} 165w,{% endif %}
+                              {% if product.featured_media.preview_image.width >= 360 %}{{ product.featured_media.preview_image | img_url: '360x' }} 360w,{% endif %}
+                              {% if product.featured_media.preview_image.width >= 533 %}{{ product.featured_media.preview_image | img_url: '533x' }} 533w,{% endif %}
+                              {% if product.featured_media.preview_image.width >= 720 %}{{ product.featured_media.preview_image | img_url: '720x' }} 720w,{% endif %}
+                              {{ product.featured_media.preview_image | img_url: 'master' }} {{ product.featured_media.preview_image.width }}w"
+                      src="{{ product.featured_media.preview_image | img_url: '533x' }}"
+                      sizes="(min-width: 1200px) calc((1200px - 10rem) / 3), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+                      loading="lazy"
+                      width="{{ product.featured_media.preview_image.width }}"
+                      height="{{ product.featured_media.preview_image.height }}"
+                      alt="{{ product.featured_media.preview_image.alt | escape }}"
+                      class="featured-collection-v2__product-image"
+                    >
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+                </div>
+
+                <div class="featured-collection-v2__product-info">
+                  <h3 class="featured-collection-v2__product-title">{{ product.title }}</h3>
+                  
+                  {% if section.settings.show_secondary_info and product.metafields.custom.secondary_info != blank %}
+                    <div class="featured-collection-v2__product-secondary-info">
+                      {{ product.metafields.custom.secondary_info }}
+                    </div>
+                  {% endif %}
+                  
+                  <div class="featured-collection-v2__product-price">
+                    {% render 'price', product: product, price_class: 'featured-collection-v2__price' %}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <div class="featured-collection-v2__product">
+            <div class="featured-collection-v2__product-card">
+              <div class="featured-collection-v2__product-image-wrapper">
+                {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+              <div class="featured-collection-v2__product-info">
+                <h3 class="featured-collection-v2__product-title">Sample product title</h3>
+                <div class="featured-collection-v2__product-secondary-info">Sample product description</div>
+                <div class="featured-collection-v2__product-price">${{ 29.99 }}</div>
+              </div>
+            </div>
+          </div>  
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {% if section.settings.show_view_all and section.settings.collection != blank and collection.products_count > section.settings.products_to_show %}
+      <div class="featured-collection-v2__view-all">
+        <a href="{{ collection.url }}" class="featured-collection-v2__view-all-button">
+          {{ section.settings.view_all_text }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  #featured-collection-v2-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .featured-collection-v2__header {
+    text-align: {{ section.settings.heading_alignment }};
+    margin-bottom: 40px;
+  }
+
+  .featured-collection-v2__title {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    margin: 0 0 15px;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .featured-collection-v2__description {
+    max-width: 800px;
+    margin: {% if section.settings.heading_alignment == 'center' %}0 auto{% else %}0{% endif %};
+    font-size: 16px;
+    line-height: 1.5;
+    color: {{ section.settings.text_color }};
+  }
+
+  .featured-collection-v2__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .featured-collection-v2__product-card {
+    height: 100%;
+    background-color: {{ section.settings.card_background_color }};
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .featured-collection-v2__product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .featured-collection-v2__product-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+
+  .featured-collection-v2__product-image-wrapper {
+    position: relative;
+    padding-bottom: 100%;
+    overflow: hidden;
+    background-color: #f5f5f5;
+  }
+
+  .featured-collection-v2__product-image,
+  .featured-collection-v2__product-image-wrapper .placeholder-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 20px;
+  }
+
+  .featured-collection-v2__product-info {
+    padding: 20px;
+  }
+
+  .featured-collection-v2__product-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: {{ section.settings.product_title_color }};
+  }
+
+  .featured-collection-v2__product-secondary-info {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: {{ section.settings.text_color }};
+  }
+
+  .featured-collection-v2__product-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: {{ section.settings.price_color }};
+  }
+
+  .featured-collection-v2__view-all {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .featured-collection-v2__view-all-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  .featured-collection-v2__view-all-button:hover {
+    background-color: {{ section.settings.button_background_hover }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .featured-collection-v2__title {
+      font-size: {{ section.settings.heading_size | times: 0.8 }}px;
+    }
+    
+    .featured-collection-v2__grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Featured Collection v2",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "YOUR DOG DESERVES THE BEST",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "default": "<p>Don't settle for artificial, low-quality chews. Give your dog a healthy, delicious treat that lasts.</p>",
+      "label": "Description"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Heading alignment"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 32,
+      "unit": "px",
+      "label": "Heading size"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 3,
+      "label": "Maximum products to show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_info",
+      "default": true,
+      "label": "Show secondary info",
+      "info": "Displays product metafield custom.secondary_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "default": true,
+      "label": "Show 'View all' button"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "default": "View all products",
+      "label": "View all button text"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#FFFFFF",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "default": "#000000",
+      "label": "Heading color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#333333",
+      "label": "Text color"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "default": "#FFFFFF",
+      "label": "Card background color"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "default": "#000000",
+      "label": "Product title color"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "default": "#C73232",
+      "label": "Price color"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "default": "#C73232",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_background_hover",
+      "default": "#A52828",
+      "label": "Button hover background"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "default": "#FFFFFF",
+      "label": "Button text color"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px",
+      "label": "Padding bottom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection v2",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

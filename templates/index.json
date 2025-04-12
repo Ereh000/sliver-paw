@@ -13,11 +13,10 @@
       "type": "image-banner-v2",
       "settings": {
         "video_url": "https://cdn.shopify.com/videos/c/o/v/7fc504a8d4b74bf3b4981d93aa344d40.mp4",
-        "image": "shopify://shop_images/0929ea7e6b885de4b01fb1529552ff89.png",
         "image_position": "center center",
         "desktop_height": 630,
         "mobile_height": 400,
-        "heading": "PREMIUM BULLY STICKS <br> SAFE, HEALTHY & DELICIOUS",
+        "heading": "PREMIUM BULLY STICKS  SAFE, HEALTHY & DELICIOUS",
         "heading_size": 40,
         "heading_color": "#ffffff",
         "heading_text_shadow": true,
@@ -37,6 +36,204 @@
         "text_box_opacity": 0.7
       }
     },
+    "image_with_content_fQXYxh": {
+      "type": "image-with-content",
+      "blocks": {
+        "feature_dq7ted": {
+          "type": "feature",
+          "settings": {
+            "title": "100% Natural & Single-Ingredient",
+            "text": "Made from real beef, free from additives & preservatives."
+          }
+        },
+        "feature_WcMdLM": {
+          "type": "feature",
+          "settings": {
+            "title": "Cleans Teeth Naturally",
+            "text": "Reduces plaque & tartar for a fresher breath."
+          }
+        },
+        "feature_nV9W8V": {
+          "type": "feature",
+          "settings": {
+            "title": "Fully Digestible & Safe",
+            "text": "Unlike rawhide, our bully sticks break down naturally in your dog's stomach."
+          }
+        },
+        "feature_3Wnea7": {
+          "type": "feature",
+          "settings": {
+            "title": "Sourced & Made in the USA",
+            "text": "Complies with USDA, FDA, CHIA, and SQF safety standards."
+          }
+        },
+        "feature_iGNddF": {
+          "type": "feature",
+          "settings": {
+            "title": "Slow-Roasted for Maximum Flavor",
+            "text": "Packed with irresistible taste your dog will love."
+          }
+        }
+      },
+      "block_order": [
+        "feature_dq7ted",
+        "feature_WcMdLM",
+        "feature_nV9W8V",
+        "feature_3Wnea7",
+        "feature_iGNddF"
+      ],
+      "settings": {
+        "background_color": "#fff0f0",
+        "heading": "WHY CHOOSE BONEZ BULLY STICKS?",
+        "heading_size": 38,
+        "heading_color": "#000000",
+        "subheading": "The Treat That Ticks Every Box for Happy, Healthy Dogs",
+        "subheading_size": 18,
+        "text_color": "#333333",
+        "accent_color": "#c73232",
+        "button_label": "SHOP NOW",
+        "button_link": "",
+        "button_background": "#c73232",
+        "button_background_hover": "#a52828",
+        "button_text_color": "#ffffff",
+        "image": "shopify://shop_images/doggy-P.png",
+        "show_circle_background": true,
+        "circle_background_color": "#c73232",
+        "show_paw_icons": true,
+        "paw_icon_color": "#ffc0c0"
+      }
+    },
+    "image_with_contentv3_C9HC3K": {
+      "type": "image-with-contentv3",
+      "blocks": {
+        "feature_9rFDwJ": {
+          "type": "feature",
+          "settings": {
+            "title": "No Rawhide, No Fillers, Just Real Beef",
+            "text": "",
+            "image": "shopify://shop_images/Frame_2147225768.png"
+          }
+        },
+        "feature_EFL46a": {
+          "type": "feature",
+          "settings": {
+            "title": "Supports Joint & Dental Health",
+            "text": "",
+            "image": "shopify://shop_images/Artboard_1.png"
+          }
+        },
+        "feature_bhxhYm": {
+          "type": "feature",
+          "settings": {
+            "title": "Long-Lasting Chews For Dogs Of All Sizes",
+            "text": ""
+          }
+        },
+        "feature_QQTG6G": {
+          "type": "feature",
+          "settings": {
+            "title": "Meets The Highest Safety & Quality Standards",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "feature_9rFDwJ",
+        "feature_EFL46a",
+        "feature_bhxhYm",
+        "feature_QQTG6G"
+      ],
+      "settings": {
+        "background_color": "#ffffff",
+        "heading": "WHAT MAKES BONEZ BULLY STICKS BETTER?",
+        "heading_size": 36,
+        "heading_color": "#000000",
+        "description": "<p>Not all dog chews are created equal. Unlike mass produced, low-quality alternatives, Bonez Bully Sticks provide maximum nutrition, safety, and enjoyment for your furry companion.</p>",
+        "text_color": "#333333",
+        "accent_color": "#c73232",
+        "divider_color": "#eeeeee",
+        "image_background_color": "#f9f9f9"
+      }
+    },
+    "featured_video_epgGne": {
+      "type": "featured-video",
+      "settings": {
+        "heading": "EXPLORE OUR NATURAL CHEW COLLECTION",
+        "heading_size": 36,
+        "text_color": "#ffffff",
+        "video_url": "https://cdn.shopify.com/videos/c/o/v/7fc504a8d4b74bf3b4981d93aa344d40.mp4",
+        "cover_image": "shopify://shop_images/0929ea7e6b885de4b01fb1529552ff89.png",
+        "overlay_opacity": 0.3,
+        "width": 1350,
+        "border_radius": 8,
+        "enable_shadow": true,
+        "margin_top": 40,
+        "margin_bottom": 40
+      }
+    },
+    "image_with_column_wTBRFK": {
+      "type": "image-with-column",
+      "blocks": {
+        "feature_j9JR9E": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "number": "01",
+            "title": "Promotes Oral Hygiene",
+            "text": "The natural chewing action on our bully sticks helps remove plaque and tartar, reducing the risk of dental disease and improving breath."
+          }
+        },
+        "feature_YHLqni": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "number": "03",
+            "title": "High in Protein, Low in Fat",
+            "text": "Our bully sticks are made only from real beef, meaning they are naturally high in protein and packed with essential nutrients"
+          }
+        },
+        "feature_h4kGAg": {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "number": "02",
+            "title": "100% Digestible and Stomach-Friendly",
+            "text": "Unlike rawhide, which can swell in a dog's stomach and lead to blockages, our bully sticks break down naturally and are easy"
+          }
+        },
+        "feature_TJDnAR": {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "number": "04",
+            "title": "No Artificial Additives or Preservatives",
+            "text": "Many store-bought dog treats are loaded with artificial ingredients that can lead to allergies, digestive issues, and long-term health"
+          }
+        }
+      },
+      "block_order": [
+        "feature_j9JR9E",
+        "feature_YHLqni",
+        "feature_h4kGAg",
+        "feature_TJDnAR"
+      ],
+      "settings": {
+        "background_color": "#fff0f0",
+        "heading": "HOW BONEZ BULLY STICKS SUPPORT YOUR DOG'S HEALTH",
+        "heading_size": 36,
+        "heading_color": "#000000",
+        "subheading": "",
+        "subheading_size": 18,
+        "text_color": "#333333",
+        "number_color": "#c73232",
+        "image": "shopify://shop_images/image_3086.png",
+        "button_label": "SHOP NOW",
+        "button_link": "",
+        "button_background": "#c73232",
+        "button_background_hover": "#a52828",
+        "button_text_color": "#ffffff"
+      }
+    },
     "featured_product_v2_mTihWm": {
       "type": "featured-product-v2",
       "settings": {
@@ -49,78 +246,179 @@
         "quantity_options": "3,6,9,12"
       }
     },
-    "image_banner": {
-      "type": "image-banner",
+    "174435048116ba19a3": {
+      "type": "apps",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "snapbundle_fix_bundle_JVHwX3": {
+          "type": "shopify://apps/snapbundle/blocks/fix-bundle/33a81c0e-39d0-4c00-a010-3922a151e7ca",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "snapbundle_fix_bundle_JVHwX3"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "featured_offers_bwxzyJ": {
+      "type": "featured-offers",
+      "blocks": {
+        "offer_444TJf": {
+          "type": "offer",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "title": "PRICING & SPECIAL OFFERS",
+            "feature_1": "Buy any individual product at full price.",
+            "feature_2": "Option to add complementary products at a discount at checkout.",
+            "feature_3": "",
+            "feature_4": "",
+            "feature_5": "",
+            "button_label": "SHOP NOW",
+            "button_link": ""
           }
         },
-        "button": {
-          "type": "buttons",
+        "offer_88mQL9": {
+          "type": "offer",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "title": "Subscription Model",
+            "feature_1": "Save 10% on your order when you subscribe for monthly deliveries.",
+            "feature_2": "Mix & match different chews each month.",
+            "feature_3": "Flexibility to pause, skip, or cancel anytime.",
+            "feature_4": "",
+            "feature_5": "",
+            "button_label": "SHOP NOW",
+            "button_link": ""
+          }
+        },
+        "offer_PjQ7cM": {
+          "type": "offer",
+          "settings": {
+            "title": "Bundle & Save Option",
+            "feature_1": "Buy 2, Get 10% Off",
+            "feature_2": "Buy 3+, Get 15% Off",
+            "feature_3": "Subscription + Bundle = Max 15% Off",
+            "feature_4": "",
+            "feature_5": "",
+            "button_label": "SHOP NOW",
+            "button_link": ""
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "offer_444TJf",
+        "offer_88mQL9",
+        "offer_PjQ7cM"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false
+        "heading": "PRICING & SPECIAL OFFERS",
+        "heading_size": 36,
+        "heading_color": "#ffffff",
+        "text_color": "#333333",
+        "accent_color": "#c73232",
+        "background_image": "shopify://shop_images/image_3087.png",
+        "background_color": "rgba(0,0,0,0)",
+        "overlay_color": "#c78732",
+        "overlay_opacity": 0.7,
+        "card_background": "#ffffff",
+        "card_title_color": "#000000",
+        "button_background": "#c73232",
+        "button_background_hover": "#a52828",
+        "button_text_color": "#ffffff"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "featured_collection_v2_Kabiw9": {
+      "type": "featured-collection-v2",
       "settings": {
-        "collection": "all",
-        "products_to_show": 8,
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
+        "title": "YOUR DOG DESERVES THE BEST",
+        "description": "<p>Don't settle for artificial, low-quality chews. Give your dog a healthy, delicious treat that lasts.</p>",
+        "heading_alignment": "left",
+        "heading_size": 32,
+        "collection": "",
+        "products_to_show": 3,
+        "show_secondary_info": true,
         "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 44,
-        "padding_bottom": 36
+        "view_all_text": "View all products",
+        "background_color": "#FFFFFF",
+        "heading_color": "#000000",
+        "text_color": "#333333",
+        "card_background_color": "#FFFFFF",
+        "product_title_color": "#000000",
+        "price_color": "#C73232",
+        "button_background": "#C73232",
+        "button_background_hover": "#A52828",
+        "button_text_color": "#FFFFFF",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "faqs_zVzJEx": {
+      "type": "faqs",
+      "blocks": {
+        "question_GUeDhW": {
+          "type": "question",
+          "settings": {
+            "question": "What makes Bonez Bully Sticks different from other brands?",
+            "answer": "<p>Our bully sticks are made from 100% real beef, slow-roasted for maximum flavor, and free from fillers, rawhide, or artificial preservatives. They meet the highest USDA and FDA safety standards and are sourced in the USA.</p>"
+          }
+        },
+        "question_PK64RD": {
+          "type": "question",
+          "settings": {
+            "question": "Are these chews safe for puppies?",
+            "answer": "<p>Yes, our bully sticks are safe for puppies who have started teething (typically around 3-4 months old). They're fully digestible and help with dental health. For very young puppies, we recommend supervision during chewing.</p>"
+          }
+        },
+        "question_kTQXd8": {
+          "type": "question",
+          "settings": {
+            "question": "How long do Bonez Bully Sticks last?",
+            "answer": "<p>The longevity depends on your dog's chewing style and size. For aggressive chewers, our standard sticks typically last 30-60 minutes. For moderate chewers, they can provide hours of entertainment. Our jumbo and extra-thick options last even longer.</p>"
+          }
+        },
+        "question_qDgAE8": {
+          "type": "question",
+          "settings": {
+            "question": "How does the subscription model work?",
+            "answer": "<p>Our subscription service delivers fresh bully sticks to your door on your schedule (monthly, bi-monthly, etc.). You save 10% on every order, can customize your box contents, and can pause, skip, or cancel anytime with no fees or commitments.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_GUeDhW",
+        "question_PK64RD",
+        "question_kTQXd8",
+        "question_qDgAE8"
+      ],
+      "settings": {
+        "heading": "Frequently Asked Questions!",
+        "heading_size": 32,
+        "image": "shopify://shop_images/image_3091.png",
+        "allow_multiple_open": false,
+        "open_first_item": true,
+        "background_color": "#FFFFFF",
+        "heading_color": "#000000",
+        "border_color": "#E5E5E5",
+        "question_background": "#FFFFFF",
+        "question_background_hover": "#F9F9F9",
+        "question_color": "#000000",
+        "answer_background": "#FFFFFF",
+        "answer_color": "#333333",
+        "icon_color": "#000000",
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     }
   },
   "order": [
     "image_banner_v2_AakwJd",
+    "image_with_content_fQXYxh",
+    "image_with_contentv3_C9HC3K",
+    "featured_video_epgGne", 
+    "image_with_column_wTBRFK",
     "featured_product_v2_mTihWm",
-    "image_banner",
-    "featured_collection"
+    "174435048116ba19a3",
+    "featured_offers_bwxzyJ",
+    "featured_collection_v2_Kabiw9",
+    "faqs_zVzJEx"
   ]
 }

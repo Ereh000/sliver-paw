@@ -1,0 +1,294 @@
+<div class="featured-video" id="featured-video-{{ section.id }}">
+  <div class="featured-video__container">
+    <div class="featured-video__wrapper">
+      {% if section.settings.video_url != blank %}
+        <div
+          class="featured-video__cover"
+          style="{% if section.settings.cover_image != blank %}background-image: url('{{ section.settings.cover_image | img_url: 'master' }}');{% endif %}"
+        >
+          <div class="featured-video__overlay"></div>
+
+          {% if section.settings.heading != blank %}
+            <div class="featured-video__text-container">
+              <h2 class="featured-video__heading">{{ section.settings.heading }}</h2>
+            </div>
+          {% endif %}
+
+          <button class="featured-video__play-button" aria-label="Play video">
+            <svg width="68" height="56" viewBox="0 0 68 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M66.52 7.74C65.7 4.78 63.34 2.42 60.38 1.6C55.08 0 34 0 34 0C34 0 12.92 0 7.62 1.6C4.66 2.42 2.3 4.78 1.48 7.74C0 13.52 0 25.2 0 25.2C0 25.2 0 36.88 1.48 42.66C2.3 45.62 4.66 47.98 7.62 48.8C12.92 50.4 34 50.4 34 50.4C34 50.4 55.08 50.4 60.38 48.8C63.34 47.98 65.7 45.62 66.52 42.66C68 36.88 68 25.2 68 25.2C68 25.2 68 13.52 66.52 7.74Z" fill="#FF0000"/>
+              <path d="M27.2 36L44.8 25.2L27.2 14.4V36Z" fill="white"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="featured-video__video-container" style="display: none;">
+          <video 
+            class="featured-video__video" 
+            src="{{ section.settings.video_url }}" 
+            controls
+            playsinline
+            {% if section.settings.cover_image != blank %}poster="{{ section.settings.cover_image | img_url: 'master' }}"{% endif %}
+          ></video>
+        </div>
+      {% else %}
+        <div class="featured-video__placeholder">
+          {% if section.settings.cover_image != blank %}
+            <img
+              src="{{ section.settings.cover_image | img_url: 'master' }}"
+              alt="{{ section.settings.cover_image.alt | escape }}"
+              loading="lazy"
+              width="{{ section.settings.cover_image.width }}"
+              height="{{ section.settings.cover_image.height }}"
+            >
+          {% else %}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+
+          {% if section.settings.heading != blank %}
+            <div class="featured-video__text-container">
+              <h2 class="featured-video__heading">{{ section.settings.heading }}</h2>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+  #featured-video-{{ section.id }} {
+    margin: {{ section.settings.margin_top }}px 0 {{ section.settings.margin_bottom }}px 0;
+  }
+
+  .featured-video__container {
+    /* max-width: {{ section.settings.width }}px; */
+    margin: 0 auto;
+    /* padding: 0 20px; */
+  }
+
+  .featured-video__wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: {{ section.settings.enable_shadow | default: false | ternary: '0 10px 30px rgba(0, 0, 0, 0.15)', 'none' }};
+  }
+
+  .featured-video__cover {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+  }
+
+  .featured-video__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, {{ section.settings.overlay_opacity }});
+  }
+
+  .featured-video__text-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+    z-index: 2;
+  }
+
+  .featured-video__heading {
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .featured-video__play-button {
+    position: absolute;
+    top: 56%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 3;
+    transition: transform 0.3s ease;
+  }
+
+  .featured-video__play-button:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .featured-video__video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    background-color: #000;
+  }
+
+  .featured-video__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+ 
+  .featured-video__placeholder {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    background-color: #f4f4f4;
+  }
+
+  .featured-video__placeholder img,
+  .featured-video__placeholder .placeholder-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 749px) {
+    .featured-video__heading {
+      font-size: {{ section.settings.heading_size | times: 0.7 }}px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const videoSection = document.getElementById('featured-video-{{ section.id }}');
+    if (!videoSection) return;
+
+    const videoCover = videoSection.querySelector('.featured-video__cover');
+    const videoContainer = videoSection.querySelector('.featured-video__video-container');
+    const video = videoSection.querySelector('.featured-video__video');
+
+    if (videoCover && videoContainer && video) {
+      videoCover.addEventListener('click', function () {
+        videoCover.style.display = 'none';
+        videoContainer.style.display = 'block';
+        video.play();
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Featured Video",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "EXPLORE OUR NATURAL CHEW COLLECTION",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 36,
+      "unit": "px",
+      "label": "Heading size"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#FFFFFF",
+      "label": "Text color"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL",
+      "info": "Direct link to MP4 video file"
+    },
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "Cover image"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 0.9,
+      "step": 0.1,
+      "default": 0.3,
+      "label": "Overlay opacity"
+    },
+    {
+      "type": "range",
+      "id": "width",
+      "min": 600,
+      "max": 1600,
+      "step": 50,
+      "default": 1200,
+      "unit": "px",
+      "label": "Section width"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 8,
+      "unit": "px",
+      "label": "Border radius"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shadow",
+      "default": true,
+      "label": "Enable shadow"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px",
+      "label": "Top margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px",
+      "label": "Bottom margin"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Video",
+      "category": "Video"
+    }
+  ]
+}
+{% endschema %}

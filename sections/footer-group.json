@@ -7,12 +7,82 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "footer_v2_N99PBd": {
+      "type": "footer-v2",
+      "blocks": {
+        "social_9jXGwC": {
+          "type": "social",
+          "settings": {
+            "heading": "Follow us"
+          }
+        },
+        "menu_phVPiT": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "menu": "main-menu"
+          }
+        },
+        "menu_78MEzj": {
+          "type": "menu",
+          "settings": {
+            "heading": "Learn",
+            "menu": "footer"
+          }
+        },
+        "menu_QX6YpT": {
+          "type": "menu",
+          "settings": {
+            "heading": "Help",
+            "menu": "footer"
+          }
+        },
+        "newsletter_kbpU6R": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Sign Up!",
+            "placeholder": "Email",
+            "button_label": "Subscribe",
+            "show_footer_logo": true
+          }
+        }
+      },
+      "block_order": [
+        "social_9jXGwC",
+        "menu_phVPiT",
+        "menu_78MEzj",
+        "menu_QX6YpT",
+        "newsletter_kbpU6R"
+      ],
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "background_color": "#F8F8F8",
+        "text_color": "#333333",
+        "heading_color": "#000000",
+        "link_color": "#333333",
+        "link_hover_color": "#000000",
+        "social_icon_color": "#000000",
+        "social_icon_hover_color": "#C73232",
+        "divider_color": "#E5E5E5",
+        "footer_logo": "shopify://shop_images/image_3082.png",
+        "show_powered_by": true,
+        "input_background_color": "#FFFFFF",
+        "input_text_color": "#333333",
+        "input_placeholder_color": "#999999",
+        "input_border_color": "#E5E5E5",
+        "button_background_color": "#000000",
+        "button_background_hover_color": "#333333",
+        "button_text_color": "#FFFFFF"
+      }
+    },
     "footer": {
       "type": "footer",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
@@ -30,6 +100,7 @@
     }
   },
   "order": [
+    "footer_v2_N99PBd",
     "footer"
   ]
 }

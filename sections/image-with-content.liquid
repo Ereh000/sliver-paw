@@ -1,7 +1,7 @@
 <div class="image-with-content" id="image-with-content-{{ section.id }}">
   <div class="page-width">
-    <div class="section-header">
-      <div class="left">
+    <div class="image-with-content__container">
+      <div class="image-with-content__text-column">
         {% if section.settings.heading != blank %}
           <h2 class="image-with-content__heading">{{ section.settings.heading }}</h2>
         {% endif %}
@@ -9,20 +9,7 @@
         {% if section.settings.subheading != blank %}
           <div class="image-with-content__subheading">{{ section.settings.subheading }}</div>
         {% endif %}
-      </div>
-      <div class="right">
-        {% if section.settings.button_label != blank %}
-          <div class="image-with-content__button-wrapper">
-            <a href="{{ section.settings.button_link }}" class="image-with-content__button">
-              {{ section.settings.button_label }}
-            </a>
-          </div>
-        {% endif %}
-      </div>
-    </div>
 
-    <div class="image-with-content__container">
-      <div class="image-with-content__text-column">
         <div class="image-with-content__features">
           {% for block in section.blocks %}
             {% if block.type == 'feature' %}
@@ -40,6 +27,14 @@
             {% endif %}
           {% endfor %}
         </div>
+
+        {% if section.settings.button_label != blank %}
+          <div class="image-with-content__button-wrapper">
+            <a href="{{ section.settings.button_link }}" class="image-with-content__button">
+              {{ section.settings.button_label }}
+            </a>
+          </div>
+        {% endif %}
       </div>
 
       <div class="image-with-content__image-column">
@@ -124,185 +119,186 @@
 </div>
 
 <style>
-    #image-with-content-{{ section.id }} {
-      padding: 60px 0;
-      background-color: {{ section.settings.background_color }};
-      position: relative;
-      overflow: hidden;
-    }
+  #image-with-content-{{ section.id }} {
+    padding: 60px 0;
+    background-color: {{ section.settings.background_color }};
+    position: relative;
+    overflow: hidden;
+  }
 
+  .image-with-content__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .image-with-content__text-column {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .image-with-content__image-column {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .image-with-content__heading {
+    font-size: {{ section.settings.heading_size }}px;
+    line-height: 1.2;
+    margin: 0 0 15px;
+    color: {{ section.settings.heading_color }};
+    font-weight: 700;
+  }
+
+  .image-with-content__subheading {
+    font-size: {{ section.settings.subheading_size }}px;
+    line-height: 1.5;
+    margin-bottom: 0px;
+    color: {{ section.settings.text_color }};
+  }
+
+  .image-with-content__features {
+    margin-bottom: 30px;
+  }
+
+  .image-with-content__feature {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .image-with-content__feature-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    color: {{ section.settings.accent_color }};
+  }
+
+  .image-with-content__feature-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 5px;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .image-with-content__feature-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: {{ section.settings.text_color }};
+  }
+
+  .image-with-content__button-wrapper {
+    margin-top: 30px;
+  }
+
+  .image-with-content__button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .image-with-content__button:hover {
+    background-color: {{ section.settings.button_background_hover }};
+    transform: translateY(-2px);
+  }
+
+  .image-with-content__image-wrapper {
+    position: relative;
+    width: 100%;
+    /* max-width: 450px; */
+  }
+
+  .image-with-content__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 2;
+    border-radius: 8px;
+  }
+
+  .image-with-content__circle-background {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background-color: {{ section.settings.circle_background_color }};
+    border-radius: 50%;
+    top: 10%;
+    left: 10%;
+    z-index: 1;
+  }
+
+  .image-with-content__paw-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .paw-icon {
+    position: absolute;
+    color: {{ section.settings.paw_icon_color }};
+    opacity: 0.5;
+  }
+
+  .paw-icon--1 {
+    top: 15%;
+    right: 10%;
+  }
+
+  .paw-icon--2 {
+    top: 40%;
+    left: 5%;
+  }
+
+  .paw-icon--3 {
+    bottom: 30%;
+    right: 15%;
+  }
+
+  .paw-icon--4 {
+    bottom: 10%;
+    left: 20%;
+  }
+
+  @media screen and (max-width: 749px) {
     .image-with-content__container {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 40px;
+      flex-direction: column-reverse;
     }
 
-    .image-with-content__text-column {
-      flex: 1;
-      min-width: 300px;
-    }
-
+    .image-with-content__text-column,
     .image-with-content__image-column {
-      flex: 1;
-      min-width: 300px;
-      display: flex;
-      justify-content: center;
+      width: 100%;
     }
 
     .image-with-content__heading {
-      font-size: {{ section.settings.heading_size }}px;
-      line-height: 1.2;
-      margin: 0 0 15px;
-      color: {{ section.settings.heading_color }};
-      font-weight: 700;
+      font-size: {{ section.settings.heading_size | times: 0.8 }}px;
     }
 
     .image-with-content__subheading {
-      font-size: {{ section.settings.subheading_size }}px;
-      line-height: 1.5;
-      margin-bottom: 30px;
-      color: {{ section.settings.text_color }};
+      font-size: {{ section.settings.subheading_size | times: 0.9 }}px;
     }
+  }
 
-    .image-with-content__features {
-      margin-bottom: 30px;
-    }
+  .section-header{
+    display: flex;
+    width: 100%;
 
-    .image-with-content__feature {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 20px;
-    }
-
-    .image-with-content__feature-icon {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      margin-right: 15px;
-      color: {{ section.settings.accent_color }};
-    }
-
-    .image-with-content__feature-title {
-      font-size: 18px;
-      font-weight: 600;
-      margin: 0 0 5px;
-      color: {{ section.settings.heading_color }};
-    }
-
-    .image-with-content__feature-text {
-      font-size: 16px;
-      line-height: 1.5;
-      color: {{ section.settings.text_color }};
-    }
-
-    .image-with-content__button-wrapper {
-      margin-top: 30px;
-    }
-
-    .image-with-content__button {
-      display: inline-block;
-      padding: 12px 24px;
-      background-color: {{ section.settings.button_background }};
-      color: {{ section.settings.button_text_color }};
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .image-with-content__button:hover {
-      background-color: {{ section.settings.button_background_hover }};
-      transform: translateY(-2px);
-    }
-
-    .image-with-content__image-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 450px;
-    }
-
-    .image-with-content__image {
-      display: block;
-      width: 100%;
-      height: auto;
-      position: relative;
-      z-index: 2;
-      border-radius: 8px;
-    }
-
-    .image-with-content__circle-background {
-      position: absolute;
-      width: 80%;
-      height: 80%;
-      background-color: {{ section.settings.circle_background_color }};
-      border-radius: 50%;
-      top: 10%;
-      left: 10%;
-      z-index: 1;
-    }
-
-    .image-with-content__paw-icons {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    .paw-icon {
-      position: absolute;
-      color: {{ section.settings.paw_icon_color }};
-      opacity: 0.5;
-    }
-
-    .paw-icon--1 {
-      top: 15%;
-      right: 10%;
-    }
-
-    .paw-icon--2 {
-      top: 40%;
-      left: 5%;
-    }
-
-    .paw-icon--3 {
-      bottom: 30%;
-      right: 15%;
-    }
-
-    .paw-icon--4 {
-      bottom: 10%;
-      left: 20%;
-    }
-
-    @media screen and (max-width: 749px) {
-      .image-with-content__container {
-        flex-direction: column-reverse;
-      }
-
-      .image-with-content__text-column,
-      .image-with-content__image-column {
-        width: 100%;
-      }
-
-      .image-with-content__heading {
-        font-size: {{ section.settings.heading_size | times: 0.8 }}px;
-      }
-
-      .image-with-content__subheading {
-        font-size: {{ section.settings.subheading_size | times: 0.9 }}px;
-      }
-    }
-
-    .section-header{
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-      align-items: baseline;
-    }
+    justify-content: space-between;
+    align-items: baseline;
+  }
 </style>
 
 {% schema %}
